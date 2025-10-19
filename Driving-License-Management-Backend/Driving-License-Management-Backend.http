@@ -1,0 +1,6 @@
+@Driving_License_Management_Backend_HostAddress = http://localhost:5029
+
+GET {{Driving_License_Management_Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
