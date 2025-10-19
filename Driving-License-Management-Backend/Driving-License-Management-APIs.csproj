@@ -11,4 +11,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Driving-License-Management-BusinessLogicLayer\Driving-License-Management-BusinessLogicLayer.csproj" />
+  </ItemGroup>
+
 </Project>
