@@ -108,10 +108,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             foreach (DataRow row in dt.Rows)
             {
                 int DriverID = Convert.ToInt32(row["DriverID"]);
-                int PersonID = Convert.ToInt32(row["PersonID"]);
-                int CreatedByUserID = Convert.ToInt32(row["CreatedByUserID"]);
-                DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
-                clsDriver driver = new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
+                clsDriver driver = FindByDriverID(DriverID);
                 drivers.Add(driver);
             }
             return drivers;

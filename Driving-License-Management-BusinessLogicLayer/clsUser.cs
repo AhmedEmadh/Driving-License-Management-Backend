@@ -170,11 +170,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             foreach (DataRow row in dtUsers.Rows)
             {
                 int userID = Convert.ToInt32(row["UserID"]);
-                int personID = Convert.ToInt32(row["PersonID"]);
-                string userName = row["UserName"].ToString();
-                string password = row["Password"].ToString();
-                bool isActive = Convert.ToBoolean(row["IsActive"]);
-                clsUser user = new clsUser(userID, personID, userName, password, isActive);
+                clsUser user = FindByUserID(userID);
                 usersList.Add(user);
             }
             return usersList;

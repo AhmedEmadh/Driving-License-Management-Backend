@@ -116,16 +116,8 @@ namespace Driving_License_Management_BusinessLogicLayer
             List<clsDetainedLicense> detainedLicenses = new List<clsDetainedLicense>();
             foreach (DataRow row in dt.Rows)
             {
-                int DetainID = Convert.ToInt32(row["DetainID"]);
                 int LicenseID = Convert.ToInt32(row["LicenseID"]);
-                DateTime DetainDate = Convert.ToDateTime(row["DetainDate"]);
-                float FineFees = float.Parse(row["FineFees"].ToString());
-                int CreatedByUserID = Convert.ToInt32(row["CreatedByUserID"]);
-                bool IsReleased = Convert.ToBoolean(row["IsReleased"]);
-                DateTime ReleaseDate = Convert.ToDateTime(row["ReleaseDate"]);
-                int ReleasedByUserID = Convert.ToInt32(row["ReleasedByUserID"]);
-                int ReleaseApplicationID = Convert.ToInt32(row["ReleaseApplicationID"]);
-                clsDetainedLicense detainedLicense = new clsDetainedLicense(DetainID, LicenseID, DetainDate, FineFees, CreatedByUserID, IsReleased, ReleaseDate, ReleasedByUserID, ReleaseApplicationID);
+                clsDetainedLicense detainedLicense = clsDetainedLicense.FindByLicenseID(LicenseID);
                 detainedLicenses.Add(detainedLicense);
             }
             return detainedLicenses;

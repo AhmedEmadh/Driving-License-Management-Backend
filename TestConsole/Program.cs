@@ -19,12 +19,12 @@ clsDataAccessSettings.Initialize(configuration);
 void Test()
 {
 
-    var Data = clsUser.GetAllUsersList();
+    var Data = clsDetainedLicense.GetAllDetainedLicensesList();
     if (Data != null)
     {
-        foreach (clsUser item in Data)
+        foreach (clsDetainedLicense item in Data)
         {
-            Console.WriteLine($"User ID: {item.UserID}, User Name: {item.UserName}, Person ID: {item.PersonID}, Is Active: {item.IsActive}");
+            Console.WriteLine($"LicenseID: {item.LicenseID}");
         }
     }
     else
