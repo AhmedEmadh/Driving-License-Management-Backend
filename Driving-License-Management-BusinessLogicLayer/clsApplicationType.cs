@@ -109,6 +109,16 @@ namespace Driving_License_Management_BusinessLogicLayer
             return list;
         }
         /// <summary>
+        /// Deletes the application type from the database.
+        /// </summary>
+        /// <returns>
+        /// True if the application type was deleted successfully, false otherwise.
+        /// </returns>
+        public bool Delete()
+        {
+            return clsApplicationTypeData.DeleteApplicationType(this.ID);
+        }
+        /// <summary>
         /// Saves the application type to the database based on its current mode.
         /// </summary>
         /// <returns>True if the application type was saved successfully, false otherwise.</returns>

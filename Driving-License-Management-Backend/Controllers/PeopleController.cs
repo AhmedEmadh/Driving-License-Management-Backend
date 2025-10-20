@@ -97,23 +97,7 @@ namespace Driving_License_Management_Backend.Controllers
             };
             return target;
         }
-        void _MapDTOToPersonData(PersonDTO source, clsPerson Destination)
-        {
-
-            Destination.NationalNo = source.NationalNumber;
-            Destination.FirstName = source.FirstName;
-            Destination.SecondName = source.SecoundName;
-            Destination.ThirdName = source.ThirdName;
-            Destination.LastName = source.LastName;
-            Destination.DateOfBirth = source.DataOfBirth;
-            Destination.Gender = (source.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Female;
-            Destination.Address = source.Address;
-            Destination.PhoneNumber = source.PhoneNumber;
-            Destination.Phone = source.PhoneNumber;
-            Destination.Email = source.Email;
-            Destination.NationalityCountryID = source.CountryId;
-            Destination.ImagePath = source.ImageURL;
-        }
+        
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -128,7 +112,7 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return NotFound("Person is not found");
             }
-            _MapDTOToPersonData(person, UpdatedPerson);
+            PersonDTO.MapDTOToPersonData(person, UpdatedPerson);
             bool isSaved = UpdatedPerson.Save();
             if (!isSaved)
                 return BadRequest("Failed to update person.");
