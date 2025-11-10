@@ -6,6 +6,8 @@ namespace Driving_License_Management_Backend.DTOs
 {
     public class PersonDTO
     {
+        #region Properties
+        [Key]
         public int Id { get; set; }
         [Required]
         [MinLength(1)]
@@ -38,7 +40,8 @@ namespace Driving_License_Management_Backend.DTOs
         public int CountryId { get; set; }
         public string? CountryName { get { return clsCountry.Find(CountryId)?.CountryName; } }
         public string? ImageURL { get; set; }
-
+        #endregion
+        #region Constructors
         public PersonDTO(){}
 
         public PersonDTO(clsPerson person)
@@ -59,6 +62,8 @@ namespace Driving_License_Management_Backend.DTOs
 
 
         }
+        #endregion
+        #region Methods
         public static void MapDTOToPersonData(PersonDTO source, clsPerson Destination)
         {
 
@@ -76,5 +81,6 @@ namespace Driving_License_Management_Backend.DTOs
             Destination.NationalityCountryID = source.CountryId;
             Destination.ImagePath = source.ImageURL;
         }
+        #endregion
     }
 }

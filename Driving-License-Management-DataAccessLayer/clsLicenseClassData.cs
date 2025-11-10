@@ -133,7 +133,7 @@ namespace Driving_License_Management_DataAccessLayer
         /// <param name="MinimumAllowedAge">The minimum allowed age for the license class.</param>
         /// <param name="DefaultValidityLength">The default validity length of the license class.</param>
         /// <param name="ClassFees">The fees associated with the license class.</param>
-        /// <returns>The ID of the newly added license class.</returns>
+        /// <returns>The ID of the newly added license class if added successfully, returns -1 otherwise</returns>
         public static int AddNewLicenseClass(string ClassName, string ClassDescription, byte MinimumAllowedAge, byte DefaultValidityLength, float ClassFees)
         {
             int CreatedID = -1;

@@ -6,16 +6,20 @@ namespace Driving_License_Management_Backend.DTOs
 {
     public class CountryDTO
     {
+        #region Properties
+        [JsonPropertyName("ID")]
+        public int ID { get; private set; }
+        [JsonPropertyName("CountryName")]
+        public string CountryName { get; }
+        #endregion
+        #region Constructors
         public CountryDTO() { }
         public CountryDTO(clsCountry country)
         {
             this.ID = country.CountryID;
             this.CountryName = country.CountryName;
         }
-        [JsonPropertyName("ID")]
-        public int ID { get; private set; }
-        [JsonPropertyName("CountryName")]
-        public string CountryName { get; }
+        #endregion
 
     }
 }

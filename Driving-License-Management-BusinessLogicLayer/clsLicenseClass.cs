@@ -59,6 +59,7 @@ namespace Driving_License_Management_BusinessLogicLayer
         {
             //call DataAccess Layer
             int AddedID = clsLicenseClassData.AddNewLicenseClass(this.ClassName, this.ClassDescription, this.MinimumAllowedAge, this.DefaultValidityLength, this.ClassFees);
+            this.LicenseClassID = AddedID;
             return (AddedID != -1);
         }
         /// <summary>

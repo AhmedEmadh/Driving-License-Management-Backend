@@ -5,6 +5,7 @@ namespace Driving_License_Management_Backend.DTOs
 {
     public class ApplicationTypeDTO
     {
+        #region Properties
         [Required]
         public int ID { get; set; }
         [Required]
@@ -12,6 +13,8 @@ namespace Driving_License_Management_Backend.DTOs
         public string Title { get; set; }
         [Required]
         public float Fees { get; set; }
+        #endregion
+        #region Constructors
         public ApplicationTypeDTO() { }
         public ApplicationTypeDTO(clsApplicationType applicationType)
         {
@@ -19,11 +22,14 @@ namespace Driving_License_Management_Backend.DTOs
             this.Title = applicationType.Title;
             this.Fees = applicationType.Fees;
         }
+        #endregion
+        #region Methods
         public void MapToEntity(clsApplicationType applicationType)
         {
             applicationType.ID = this.ID;
             applicationType.Title = this.Title;
             applicationType.Fees = this.Fees;
         }
+        #endregion
     }
 }
