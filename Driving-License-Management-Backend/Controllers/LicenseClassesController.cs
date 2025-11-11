@@ -45,7 +45,7 @@ namespace Driving_License_Management_Backend.Controllers
 
             // 2. Create a new LicenseClass object from DTO
             clsLicenseClass newlicenseClass = new clsLicenseClass();
-            licenseClassDTO.MapToEntity(newlicenseClass);
+            licenseClassDTO.MapValuesToEntity(newlicenseClass);
             // 3. Call your business logic to save to DB
             newlicenseClass.Mode = clsLicenseClass.enMode.AddNew;
             if (!newlicenseClass.Save())
@@ -59,6 +59,7 @@ namespace Driving_License_Management_Backend.Controllers
         [HttpPut("{ID}"), ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status400BadRequest), ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateLicenseClass(int ID, [FromBody] LicenseClassDTO licenseClassDTO)
         {
+            licenseClassDTO.ID = ID;
             // 1. Validate the model
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -69,7 +70,7 @@ namespace Driving_License_Management_Backend.Controllers
                 return NotFound("License Class is not found");
             }
             // 3. Map updated fields from DTO to entity
-            licenseClassDTO.SetValueTo(licenseClass);
+            licenseClassDTO.MapValuesToEntity(licenseClass);
             // Set ID to ID paramenter
             licenseClassDTO.ID = ID;
             // 4. Set mode to Update

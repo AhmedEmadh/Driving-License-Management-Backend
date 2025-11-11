@@ -1,10 +1,11 @@
-﻿using Driving_License_Management_BusinessLogicLayer;
+﻿using Driving_License_Management_Backend.DTOs.Abstraction;
+using Driving_License_Management_BusinessLogicLayer;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Driving_License_Management_Backend.DTOs
 {
-    public class LicenseClassDTO
+    public class LicenseClassDTO : IDTO<clsLicenseClass>
     {
         #region Properties
         [Key]
@@ -25,22 +26,13 @@ namespace Driving_License_Management_Backend.DTOs
         public LicenseClassDTO() { }
         public LicenseClassDTO(clsLicenseClass licenseClass)
         {
-            SetValueTo(licenseClass);
+            SetValuesFromEntity(licenseClass);
 
         }
         #endregion
         #region Methods
-        public void MapToEntity(clsLicenseClass licenseClass)
-        {
-            licenseClass.LicenseClassID = this.ID;
-            licenseClass.ClassName = this.Name;
-            licenseClass.ClassDescription = this.Description;
-            licenseClass.MinimumAllowedAge = this.MinimumAllowedAge;
-            licenseClass.DefaultValidityLength = this.DefaultValidityLengthInYears;
-            licenseClass.ClassFees = this.ClassFees;
 
-        }
-        public void SetValueTo(clsLicenseClass licenseClass)
+        public void SetValuesFromEntity(clsLicenseClass licenseClass)
         {
             this.ID = licenseClass.LicenseClassID;
             this.Name = licenseClass.ClassName;
@@ -48,6 +40,16 @@ namespace Driving_License_Management_Backend.DTOs
             this.MinimumAllowedAge = licenseClass.MinimumAllowedAge;
             this.DefaultValidityLengthInYears = licenseClass.DefaultValidityLength;
             this.ClassFees = licenseClass.ClassFees;
+        }
+
+        public void MapValuesToEntity(clsLicenseClass licenseClass)
+        {
+            licenseClass.LicenseClassID = this.ID;
+            licenseClass.ClassName = this.Name;
+            licenseClass.ClassDescription = this.Description;
+            licenseClass.MinimumAllowedAge = this.MinimumAllowedAge;
+            licenseClass.DefaultValidityLength = this.DefaultValidityLengthInYears;
+            licenseClass.ClassFees = this.ClassFees;
         }
         #endregion
     }

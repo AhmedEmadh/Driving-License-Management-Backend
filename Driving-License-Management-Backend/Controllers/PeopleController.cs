@@ -54,7 +54,7 @@ namespace Driving_License_Management_Backend.Controllers
                 SecondName = person.SecoundName,
                 ThirdName = person.ThirdName,
                 LastName = person.LastName,
-                DateOfBirth = person.DataOfBirth,
+                DateOfBirth = person.DateOfBirth,
                 Gender = (person.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Male,
                 Address = person.Address,
                 PhoneNumber = person.PhoneNumber,
@@ -86,7 +86,7 @@ namespace Driving_License_Management_Backend.Controllers
                 SecondName = source.SecoundName,
                 ThirdName = source.ThirdName,
                 LastName = source.LastName,
-                DateOfBirth = source.DataOfBirth,
+                DateOfBirth = source.DateOfBirth,
                 Gender = (source.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Female,
                 Address = source.Address,
                 PhoneNumber = source.PhoneNumber,
@@ -105,6 +105,7 @@ namespace Driving_License_Management_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdatePerson(int id, [FromBody] PersonDTO person)
         {
+            person.Id = id;
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var UpdatedPerson = clsPerson.Find(person.Id);
@@ -112,7 +113,7 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return NotFound("Person is not found");
             }
-            PersonDTO.MapDTOToPersonData(person, UpdatedPerson);
+            person.MapValuesToEntity(UpdatedPerson);
             bool isSaved = UpdatedPerson.Save();
             if (!isSaved)
                 return BadRequest("Failed to update person.");

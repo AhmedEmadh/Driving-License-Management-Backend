@@ -44,7 +44,7 @@ namespace Driving_License_Management_Backend.Controllers
                 return BadRequest("Invalid data.");
             }
             var newApplicationType = new clsApplicationType();
-            applicationTypeDTO.MapToEntity(newApplicationType);
+            applicationTypeDTO.MapValuesToEntity(newApplicationType);
             newApplicationType.Mode = clsApplicationType.enMode.AddNew;
             if (newApplicationType.Save())
             {
@@ -61,6 +61,7 @@ namespace Driving_License_Management_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateApplicationType(int ID, [FromBody] ApplicationTypeDTO applicationTypeDTO)
         {
+            applicationTypeDTO.ID = ID;
             if (ModelState.IsValid == false)
             {
                 return BadRequest("Invalid data.");
@@ -70,8 +71,7 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return NotFound("Application Type is not found");
             }
-            applicationTypeDTO.ID = ID;
-            applicationTypeDTO.MapToEntity(existingApplicationType);
+            applicationTypeDTO.MapValuesToEntity(existingApplicationType);
             existingApplicationType.Mode = clsApplicationType.enMode.Update;
             if (existingApplicationType.Save())
             {
