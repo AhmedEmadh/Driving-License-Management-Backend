@@ -105,6 +105,7 @@ namespace Driving_License_Management_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdatePerson(int id, [FromBody] PersonDTO person)
         {
+            person.Id = id;
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var UpdatedPerson = clsPerson.Find(person.Id);

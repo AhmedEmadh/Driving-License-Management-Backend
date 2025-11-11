@@ -59,6 +59,7 @@ namespace Driving_License_Management_Backend.Controllers
         [HttpPut("{ID}"), ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status400BadRequest), ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateLicenseClass(int ID, [FromBody] LicenseClassDTO licenseClassDTO)
         {
+            licenseClassDTO.ID = ID;
             // 1. Validate the model
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
