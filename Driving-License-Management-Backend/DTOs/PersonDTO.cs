@@ -26,7 +26,7 @@ namespace Driving_License_Management_Backend.DTOs
         [MinLength(1)]
         public string LastName { get; set; }
         [Required]
-        public DateTime DataOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         [Required]
         [MinLength(1)]
         public string Gender { get; set; }
@@ -61,7 +61,7 @@ namespace Driving_License_Management_Backend.DTOs
             this.SecoundName = person.SecondName;
             this.ThirdName = person.ThirdName;
             this.LastName = person.LastName;
-            this.DataOfBirth = person.DateOfBirth;
+            this.DateOfBirth = person.DateOfBirth;
             this.Gender = (person.Gender == (short)clsPerson.enGender.Male) ? "Male" : "Female";
             this.Address = person.Address;
             this.PhoneNumber = person.Phone;
@@ -78,7 +78,7 @@ namespace Driving_License_Management_Backend.DTOs
             person.SecondName = this.SecoundName;
             person.ThirdName = this.ThirdName;
             person.LastName = this.LastName;
-            person.DateOfBirth = this.DataOfBirth;
+            person.DateOfBirth = this.DateOfBirth;
             person.Gender = (this.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Female;
             person.Address = this.Address;
             person.Phone = this.PhoneNumber;
