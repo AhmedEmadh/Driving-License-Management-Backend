@@ -112,7 +112,7 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return NotFound("Person is not found");
             }
-            PersonDTO.MapDTOToPersonData(person, UpdatedPerson);
+            person.MapValuesToEntity(UpdatedPerson);
             bool isSaved = UpdatedPerson.Save();
             if (!isSaved)
                 return BadRequest("Failed to update person.");

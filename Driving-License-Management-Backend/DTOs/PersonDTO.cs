@@ -1,10 +1,12 @@
-﻿using Driving_License_Management_BusinessLogicLayer;
+﻿using Driving_License_Management_Backend.DTOs.Abstraction;
+using Driving_License_Management_BusinessLogicLayer;
 using Microsoft.Identity.Client;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Driving_License_Management_Backend.DTOs
 {
-    public class PersonDTO
+    public class PersonDTO : IDTO<clsPerson>
     {
         #region Properties
         [Key]
@@ -46,6 +48,13 @@ namespace Driving_License_Management_Backend.DTOs
 
         public PersonDTO(clsPerson person)
         {
+            SetValuesFromEntity(person);
+        }
+        #endregion
+        #region Methods
+        
+        public void SetValuesFromEntity(clsPerson person)
+        {
             this.Id = person.PersonID;
             this.NationalNumber = person.NationalNo;
             this.FirstName = person.FirstName;
@@ -53,33 +62,29 @@ namespace Driving_License_Management_Backend.DTOs
             this.ThirdName = person.ThirdName;
             this.LastName = person.LastName;
             this.DataOfBirth = person.DateOfBirth;
-            this.Gender = (person.Gender == (short)clsPerson.enGender.Male)?"Male":"Female";
+            this.Gender = (person.Gender == (short)clsPerson.enGender.Male) ? "Male" : "Female";
             this.Address = person.Address;
             this.PhoneNumber = person.Phone;
             this.Email = person.Email;
             this.CountryId = person.NationalityCountryID;
             this.ImageURL = person.ImagePath;
-
-
         }
-        #endregion
-        #region Methods
-        public static void MapDTOToPersonData(PersonDTO source, clsPerson Destination)
-        {
 
-            Destination.NationalNo = source.NationalNumber;
-            Destination.FirstName = source.FirstName;
-            Destination.SecondName = source.SecoundName;
-            Destination.ThirdName = source.ThirdName;
-            Destination.LastName = source.LastName;
-            Destination.DateOfBirth = source.DataOfBirth;
-            Destination.Gender = (source.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Female;
-            Destination.Address = source.Address;
-            Destination.PhoneNumber = source.PhoneNumber;
-            Destination.Phone = source.PhoneNumber;
-            Destination.Email = source.Email;
-            Destination.NationalityCountryID = source.CountryId;
-            Destination.ImagePath = source.ImageURL;
+        public void MapValuesToEntity(clsPerson person)
+        {
+            person.PersonID = this.Id;
+            person.NationalNo = this.NationalNumber;
+            person.FirstName = this.FirstName;
+            person.SecondName = this.SecoundName;
+            person.ThirdName = this.ThirdName;
+            person.LastName = this.LastName;
+            person.DateOfBirth = this.DataOfBirth;
+            person.Gender = (this.Gender == "Male") ? (short)clsPerson.enGender.Male : (short)clsPerson.enGender.Female;
+            person.Address = this.Address;
+            person.Phone = this.PhoneNumber;
+            person.Email = this.Email;
+            person.NationalityCountryID = this.CountryId;
+            person.ImagePath = this.ImageURL;
         }
         #endregion
     }

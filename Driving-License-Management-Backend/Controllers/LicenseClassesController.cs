@@ -45,7 +45,7 @@ namespace Driving_License_Management_Backend.Controllers
 
             // 2. Create a new LicenseClass object from DTO
             clsLicenseClass newlicenseClass = new clsLicenseClass();
-            licenseClassDTO.MapToEntity(newlicenseClass);
+            licenseClassDTO.MapValuesToEntity(newlicenseClass);
             // 3. Call your business logic to save to DB
             newlicenseClass.Mode = clsLicenseClass.enMode.AddNew;
             if (!newlicenseClass.Save())
