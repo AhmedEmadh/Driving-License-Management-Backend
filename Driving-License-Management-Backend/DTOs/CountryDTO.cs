@@ -20,7 +20,8 @@ namespace Driving_License_Management_Backend.DTOs
         {
             SetValuesFromEntity(country);
         }
-
+        #endregion
+        #region Methods
         public void SetValuesFromEntity(clsCountry country)
         {
             this.ID = country.CountryID;

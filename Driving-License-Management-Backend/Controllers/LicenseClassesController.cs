@@ -69,7 +69,7 @@ namespace Driving_License_Management_Backend.Controllers
                 return NotFound("License Class is not found");
             }
             // 3. Map updated fields from DTO to entity
-            licenseClassDTO.SetValueTo(licenseClass);
+            licenseClassDTO.MapValuesToEntity(licenseClass);
             // Set ID to ID paramenter
             licenseClassDTO.ID = ID;
             // 4. Set mode to Update
