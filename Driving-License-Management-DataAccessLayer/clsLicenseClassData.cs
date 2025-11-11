@@ -199,5 +199,33 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return isSuccess;
         }
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="LicenseClassID">The ID of the license class to update.</param>
+        /// <returns>True if the delete was successful, false otherwise.</returns>
+        public static bool DeleteLicenseClass(int LicenseClassID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM LicenseClasses WHERE LicenseClassID = @LicenseClassID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = rowsAffected > 0;
+            }
+            catch (SqlException ex)
+            {
+                clsLogger.Log(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }

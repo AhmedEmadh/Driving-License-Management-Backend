@@ -164,5 +164,9 @@ namespace Driving_License_Management_BusinessLogicLayer
             }
             return false;
         }
+        public bool Delete()
+        {
+            return clsLicenseClassData.DeleteLicenseClass(this.LicenseClassID);
+        }
     }
 }

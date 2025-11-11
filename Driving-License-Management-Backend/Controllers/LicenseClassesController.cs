@@ -69,7 +69,9 @@ namespace Driving_License_Management_Backend.Controllers
                 return NotFound("License Class is not found");
             }
             // 3. Map updated fields from DTO to entity
-            licenseClassDTO.MapToEntity(licenseClass);
+            licenseClassDTO.SetValueTo(licenseClass);
+            // Set ID to ID paramenter
+            licenseClassDTO.ID = ID;
             // 4. Set mode to Update
             licenseClass.Mode = clsLicenseClass.enMode.Update;
             // 5. Save the updated LicenseClass
@@ -95,7 +97,12 @@ namespace Driving_License_Management_Backend.Controllers
                 return NotFound("License Class is not found");
             }
             // 3. Here you would call a delete method in your business logic layer
-            throw new NotImplementedException("Delete method is not implemented in clsLicenseClass.");
+            if (!licenseClass.Delete())
+            {
+                return BadRequest("Failed to delete License Class");
+            }
+            // 4. Return a success response
+            return Ok("License Class deleted successfully");
         }
     }
 }

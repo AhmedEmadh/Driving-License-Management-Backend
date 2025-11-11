@@ -25,12 +25,7 @@ namespace Driving_License_Management_Backend.DTOs
         public LicenseClassDTO() { }
         public LicenseClassDTO(clsLicenseClass licenseClass)
         {
-            this.ID = licenseClass.LicenseClassID;
-            this.Name = licenseClass.ClassName;
-            this.Description = licenseClass.ClassDescription;
-            this.MinimumAllowedAge = licenseClass.MinimumAllowedAge;
-            this.DefaultValidityLengthInYears = licenseClass.DefaultValidityLength;
-            this.ClassFees = licenseClass.ClassFees;
+            SetValueTo(licenseClass);
 
         }
         #endregion
@@ -44,6 +39,15 @@ namespace Driving_License_Management_Backend.DTOs
             licenseClass.DefaultValidityLength = this.DefaultValidityLengthInYears;
             licenseClass.ClassFees = this.ClassFees;
 
+        }
+        public void SetValueTo(clsLicenseClass licenseClass)
+        {
+            this.ID = licenseClass.LicenseClassID;
+            this.Name = licenseClass.ClassName;
+            this.Description = licenseClass.ClassDescription;
+            this.MinimumAllowedAge = licenseClass.MinimumAllowedAge;
+            this.DefaultValidityLengthInYears = licenseClass.DefaultValidityLength;
+            this.ClassFees = licenseClass.ClassFees;
         }
         #endregion
     }
