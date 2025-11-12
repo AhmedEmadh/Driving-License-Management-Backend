@@ -40,6 +40,7 @@ namespace Driving_License_Management_Backend.DTOs
         public string Email { get; set; }
         [Required]
         public int CountryId { get; set; }
+        public CountryDTO? Country { get; set; }
         public string? CountryName { get { return clsCountry.Find(CountryId)?.CountryName; } }
         public string? ImageURL { get; set; }
         #endregion
@@ -67,6 +68,7 @@ namespace Driving_License_Management_Backend.DTOs
             this.PhoneNumber = person.Phone;
             this.Email = person.Email;
             this.CountryId = person.NationalityCountryID;
+            this.Country = new CountryDTO(clsCountry.Find(this.CountryId));
             this.ImageURL = person.ImagePath;
         }
 
@@ -84,6 +86,7 @@ namespace Driving_License_Management_Backend.DTOs
             person.Phone = this.PhoneNumber;
             person.Email = this.Email;
             person.NationalityCountryID = this.CountryId;
+            person.CountryInfo = clsCountry.Find(this.CountryId);
             person.ImagePath = this.ImageURL;
         }
         #endregion
