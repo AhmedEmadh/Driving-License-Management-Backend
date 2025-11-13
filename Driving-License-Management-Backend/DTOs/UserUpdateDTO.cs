@@ -7,6 +7,7 @@ namespace Driving_License_Management_Backend.DTOs
     public class UserUpdateDTO : IDTO<clsUser>
     {
         #region Properties
+        [Key]
         public int id { get; set; }
         [Required]
         public string UserName { get; set; }

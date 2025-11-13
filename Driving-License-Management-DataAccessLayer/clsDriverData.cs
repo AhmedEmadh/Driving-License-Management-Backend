@@ -188,6 +188,38 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return isSuccess;
         }
-
+        /// <summary>
+        /// Deletes a driver record from the database based on the specified driver ID.
+        /// </summary>
+        /// <remarks>This method attempts to delete the driver record with the specified <paramref
+        /// name="DriverId"/> from the database. If the specified driver ID does not exist, the method returns <see
+        /// langword="false"/> without throwing an exception.</remarks>
+        /// <param name="DriverId">The unique identifier of the driver to be deleted. Must correspond to an existing driver record in the
+        /// database.</param>
+        /// <returns><see langword="true"/> if the driver record was successfully deleted; otherwise, <see langword="false"/>.</returns>
+        public static bool DeleteDriver(int DriverId)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM Drivers WHERE DriverID = @DriverID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@DriverID", DriverId);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+                isSuccess = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }

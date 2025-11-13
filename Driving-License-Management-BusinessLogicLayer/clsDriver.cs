@@ -16,7 +16,8 @@ namespace Driving_License_Management_BusinessLogicLayer
         public int PersonID { get; set; }
         public clsPerson PersonInfo { get; set; }
         public int CreatedByUserID { get; set; }
-        DateTime CreatedDate { get; set; }
+        public clsUser CreatedByUserInfo { get; set; }
+        public DateTime CreatedDate { get; set; }
         /// <summary>
         /// Initializes a new instance of the clsDriver class with default values.
         /// </summary>
@@ -42,7 +43,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             this.CreatedByUserID = CreatedByUserID;
             this.CreatedDate = CreatedDate;
             PersonInfo = clsPerson.Find(PersonID);
-
+            CreatedByUserInfo = clsUser.FindByUserID(CreatedByUserID);
             Mode = enMode.Update;
         }
         /// <summary>
@@ -71,7 +72,11 @@ namespace Driving_License_Management_BusinessLogicLayer
         {
             int PersonID = -1, CreatedByUserID = -1;
             DateTime CreatedDate = DateTime.MaxValue;
-            clsDriverData.GetDriverInfoByDriverID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate);
+            bool result = clsDriverData.GetDriverInfoByDriverID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate);
+            if(!result)
+            {
+                return null;
+            }
             return new clsDriver(DriverID, PersonID, CreatedByUserID, CreatedDate);
         }
         /// <summary>
@@ -154,6 +159,13 @@ namespace Driving_License_Management_BusinessLogicLayer
         public static DataTable GetInternationalLicenses(int DriverID)
         {
             return clsInternationalLicense.GetDriverInternationalLicenses(DriverID);
+        }
+        /// <summary>
+        /// Deletes the driver from the database.
+        /// </summary>
+        public bool Delete()
+        {
+            return clsDriverData.DeleteDriver(this.DriverID);
         }
     }
 }
