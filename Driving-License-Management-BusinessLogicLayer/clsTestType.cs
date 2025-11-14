@@ -50,7 +50,11 @@ namespace Driving_License_Management_BusinessLogicLayer
         private bool _AddNewTestType()
         {
             int CreatedID = clsTestTypeData.AddNewTestType(this.Title, this.Description, this.Fees);
-            return (CreatedID != -1);
+            if (CreatedID > 0)
+            {
+                ID = CreatedID;
+            }
+            return (CreatedID > 0);
         }
         /// <summary>
         /// Updates an existing test type in the database.
@@ -147,6 +151,10 @@ namespace Driving_License_Management_BusinessLogicLayer
                 default:
                     return string.Empty;
             }
+        }
+        public bool Delete()
+        {
+            return clsTestTypeData.DeleteTestType(this.ID);
         }
     }
 }

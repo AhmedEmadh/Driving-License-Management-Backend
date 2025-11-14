@@ -148,5 +148,35 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return isSuccess;
         }
+        /// <summary>
+        /// Deletes a test type from the database.
+        /// </summary>
+
+        public static bool DeleteTestType(int TestTypeID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM TestTypes WHERE TestTypeID=@TestTypeID;";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }
