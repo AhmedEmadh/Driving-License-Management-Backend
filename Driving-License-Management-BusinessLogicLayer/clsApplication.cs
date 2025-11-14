@@ -1,4 +1,5 @@
 ﻿using Driving_License_Management_DataAccessLayer;
+using System.Data;
 
 namespace Driving_License_Management_BusinessLogicLayer
 {
@@ -87,6 +88,12 @@ namespace Driving_License_Management_BusinessLogicLayer
         {
             //call DataAccess Layer
             this.ApplicationID = clsApplicationData.AddNewApplication(this.ApplicantPersonID, this.ApplicationDate, this.ApplicationTypeID, (byte)this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
+            if (this.ApplicationID > 0)
+            {
+                ApplicationTypeInfo = clsApplicationType.Find(this.ApplicationTypeID);
+                CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
+                ApplicantPersonInfo = clsPerson.Find(this.ApplicantPersonID);
+            }
             return (this.ApplicationID != -1);
         }
         /// <summary>
@@ -228,6 +235,25 @@ namespace Driving_License_Management_BusinessLogicLayer
         {
             return clsApplication.GetActiveApplicationID(this.ApplicantPersonID, ApplicationTypeID);
         }
-
+        public static List<clsApplication> GetAllApplicationsList()
+        {
+            DataTable dt = clsApplicationData.GetAllApplications();
+            List<clsApplication> applications = new List<clsApplication>();
+            foreach (DataRow row in dt.Rows)
+            {
+                int ApplicationID = Convert.ToInt32(row["ApplicationID"]);
+                int ApplicantPersonID = Convert.ToInt32(row["ApplicantPersonID"]);
+                int ApplicationTypeID = Convert.ToInt32(row["ApplicationTypeID"]);
+                short ApplicationStatus = Convert.ToInt16(row["ApplicationStatus"]);
+                DateTime ApplicationDate = Convert.ToDateTime(row["ApplicationDate"]);
+                DateTime LastStatusDate = Convert.ToDateTime(row["LastStatusDate"]);
+                float PaidFees = Convert.ToSingle(row["PaidFees"]);
+                int CreatedByUserID = Convert.ToInt32(row["CreatedByUserID"]);
+                clsApplication app = new clsApplication(ApplicationID, ApplicantPersonID, ApplicationDate, ApplicationTypeID, (enApplicationStatus)ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);
+                app.Mode = enMode.Update;
+                applications.Add(app);
+            }
+            return applications;
+        }
     }
 }
