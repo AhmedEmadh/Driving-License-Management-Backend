@@ -278,5 +278,30 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return isSuccess;
         }
+
+        public static bool DeleteLicense(int LicenseID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM Licenses WHERE LicenseID = @LicenseID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+                isSuccess = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }

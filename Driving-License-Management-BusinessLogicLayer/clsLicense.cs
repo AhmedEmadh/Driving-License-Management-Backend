@@ -1,4 +1,5 @@
 ﻿using Driving_License_Management_DataAccessLayer;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +21,7 @@ namespace Driving_License_Management_BusinessLogicLayer
         public int DriverID { set; get; }
         public int LicenseClass { set; get; }
         public clsLicenseClass licenseClassInfo;
-        public DateTime IssueDate { set; get; }
+        public DateTime IssueDate { private set; get; }
         public DateTime ExpirationDate { set; get; }
         public string Notes { set; get; }
         public float PaidFees { set; get; }
@@ -35,6 +36,7 @@ namespace Driving_License_Management_BusinessLogicLayer
         }
         public clsDetainedLicense DetainedInfo { set; get; }
         public int CreatedByUserID { set; get; }
+        public clsUser CreatedByUserInfo { set; get; }
         public bool IsDetained
         {
             get
@@ -92,24 +94,33 @@ namespace Driving_License_Management_BusinessLogicLayer
             this.IssueReason = IssueReason;
             this.CreatedByUserID = CreatedByUserID;
 
+            _FillRelatedObjects();
+            Mode = enMode.Update;
+        }
+        private void _FillRelatedObjects()
+        {
             this.ApplicationInfo = clsApplication.FindBaseApplication(this.ApplicationID);
             this.DriverInfo = clsDriver.FindByDriverID(this.DriverID);
             this.licenseClassInfo = clsLicenseClass.Find(this.LicenseClass);
             this.DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
-
-            Mode = enMode.Update;
+            this.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
         }
-
         /// <summary>
         /// Adds a new license to the database.
         /// </summary>
         /// <returns>True if the license was added successfully, false otherwise.</returns>
         private bool _AddNewLicense()
         {
+            this.IssueDate = DateTime.Now;
+            licenseClassInfo = clsLicenseClass.Find(this.LicenseClass);
+            if (licenseClassInfo != null) {
+                this.ExpirationDate = this.IssueDate.AddYears(licenseClassInfo.DefaultValidityLength);
+            }
             int LicenseID = clsLicenseData.AddNewLicense(this.ApplicationID, this.DriverID, this.LicenseClass, this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees, this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
             if (LicenseID > 0)
             {
                 this.LicenseID = LicenseID;
+                _FillRelatedObjects();
                 return true;
             }
             else
@@ -123,6 +134,7 @@ namespace Driving_License_Management_BusinessLogicLayer
         /// <returns>True if the license was updated successfully, false otherwise.</returns>
         private bool _UpdateLicense()
         {
+            this.ExpirationDate = this.IssueDate.AddYears(licenseClassInfo.DefaultValidityLength);
             return clsLicenseData.UpdateLicense(LicenseID, ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, (byte)IssueReason, CreatedByUserID); ;
         }
         /// <summary>
@@ -415,5 +427,9 @@ namespace Driving_License_Management_BusinessLogicLayer
             return NewLicense;
         }
 
+        public bool Delete()
+        {
+            return clsLicenseData.DeleteLicense(this.LicenseID);
+        }
     }
 }

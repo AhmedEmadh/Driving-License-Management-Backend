@@ -414,7 +414,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             License.ApplicationID = this.ApplicationID;
             License.DriverID = DriverID;
             License.LicenseClass = this.LicenseClassID;
-            License.IssueDate = DateTime.Now;
+            //License.IssueDate = DateTime.Now;
             License.ExpirationDate = DateTime.Now.AddYears(this.LicenseClassInfo.DefaultValidityLength);
             License.Notes = Notes;
             License.PaidFees = this.LicenseClassInfo.ClassFees;
