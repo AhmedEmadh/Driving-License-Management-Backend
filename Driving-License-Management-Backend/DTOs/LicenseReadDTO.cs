@@ -1,40 +1,39 @@
 ﻿using Driving_License_Management_Backend.DTOs.Abstraction;
 using Driving_License_Management_BusinessLogicLayer;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.Identity.Client;
+using System.Text.Json.Serialization;
 
 namespace Driving_License_Management_Backend.DTOs
 {
-    public class LicenceUpdateDTO: IDTO<clsLicense>
+    public class LicenseReadDTO : IDTO<clsLicense>
     {
         #region Properties
-        [Key]
         public int Id { get; set; }
-        [Required]
         public int ApplicationId { get; set; }
-        [Required]
+        [JsonIgnore]
         public int DriverId { get; set; }
-        [Required]
+        public DriverReadDTO Driver { get; set; }
+        [JsonIgnore]
         public int LicenseClassId { get; set; }
-        //public DateOnly IssueDate { get; set; }
-        //public DateOnly ExpiryDate { get; set; }
-        [Required]
+        public LicenseClassDTO LicenseClass { get; set; }
+        public DateOnly IssueDate { get; set; }
+        public DateOnly ExpiryDate { get; set; }
         public string Notes { get; set; }
-        [Required]
         public float PaidFees { get; set; }
-        [Required]
-        public bool IsActive { get; set; }
-        [Required]
+        bool IsActive { get; set; }
         public short IssueReason { get; set; }
-        [Required]
+        [JsonIgnore]
         public int CreatedById { get; set; }
+        public UserReadDTO CreatedBy { get; set; }
         #endregion
         #region Constructors
-        public LicenceUpdateDTO() { }
-        public LicenceUpdateDTO(clsLicense entity)
+        public LicenseReadDTO()
+        {
+        }
+        public LicenseReadDTO(clsLicense entity)
         {
             SetValuesFromEntity(entity);
         }
-
         #endregion
         #region Methods
         public void SetValuesFromEntity(clsLicense entity)
@@ -42,14 +41,18 @@ namespace Driving_License_Management_Backend.DTOs
             Id = entity.LicenseID;
             ApplicationId = entity.ApplicationID;
             DriverId = entity.DriverID;
+            Driver = new DriverReadDTO(entity.DriverInfo);
             LicenseClassId = entity.LicenseClass;
-            //IssueDate = DateOnly.FromDateTime(entity.IssueDate);
-            //ExpiryDate = DateOnly.FromDateTime(entity.ExpirationDate);
+            LicenseClass = new LicenseClassDTO(entity.licenseClassInfo);
+            IssueDate = DateOnly.FromDateTime(entity.IssueDate);
+            ExpiryDate = DateOnly.FromDateTime(entity.ExpirationDate);
             Notes = entity.Notes;
             PaidFees = entity.PaidFees;
             IsActive = entity.IsActive;
             IssueReason = (short)entity.IssueReason;
             CreatedById = entity.CreatedByUserID;
+            // CreatedBy property mapping can be added here if needed
+
         }
 
         public void MapValuesToEntity(clsLicense entity)
@@ -57,9 +60,7 @@ namespace Driving_License_Management_Backend.DTOs
             entity.LicenseID = Id;
             entity.ApplicationID = ApplicationId;
             entity.DriverID = DriverId;
-            entity.DriverInfo = clsDriver.FindByDriverID(DriverId);
             entity.LicenseClass = LicenseClassId;
-            entity.licenseClassInfo = clsLicenseClass.Find(LicenseClassId);
             //entity.IssueDate = IssueDate.ToDateTime(new TimeOnly(0, 0));
             //entity.ExpirationDate = ExpiryDate.ToDateTime(new TimeOnly(0, 0));
             entity.Notes = Notes;
@@ -67,7 +68,6 @@ namespace Driving_License_Management_Backend.DTOs
             entity.IsActive = IsActive;
             entity.IssueReason = (clsLicense.enIssueReason)IssueReason;
             entity.CreatedByUserID = CreatedById;
-            entity.CreatedByUserInfo = clsUser.FindByUserID(CreatedById);
         }
         #endregion
     }

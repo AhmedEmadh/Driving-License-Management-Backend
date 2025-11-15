@@ -10,25 +10,25 @@ namespace Driving_License_Management_Backend.Controllers
     public class LicensesController : ControllerBase
     {
         [HttpGet, ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<LicenceReadDTO>> GetAllLicenses()
+        public ActionResult<List<LicenseReadDTO>> GetAllLicenses()
         {
             var licenses = Driving_License_Management_BusinessLogicLayer.clsLicense.GetAllLicensesList();
-            var licenseDTOs = licenses.Select(license => new LicenceReadDTO(license)).ToList();
+            var licenseDTOs = licenses.Select(license => new LicenseReadDTO(license)).ToList();
             return Ok(licenseDTOs);
         }
         [HttpGet("{id}"), ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<LicenceReadDTO> GetLicenseById(int id)
+        public ActionResult<LicenseReadDTO> GetLicenseById(int id)
         {
             var license = clsLicense.Find(id);
             if (license == null)
             {
                 return NotFound();
             }
-            var licenseDTO = new LicenceReadDTO(license);
+            var licenseDTO = new LicenseReadDTO(license);
             return Ok(licenseDTO);
         }
         [HttpPost, ProducesResponseType(StatusCodes.Status201Created), ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BadRequestObjectResult)), ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<LicenceReadDTO> AddNewLicense([FromBody] LicenceUpdateDTO licenseDTO)
+        public ActionResult<LicenseReadDTO> AddNewLicense([FromBody] LicenseUpdateDTO licenseDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -42,11 +42,11 @@ namespace Driving_License_Management_Backend.Controllers
                 //Internal Server Error
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            var createdLicenseDTO = new LicenceReadDTO(license);
+            var createdLicenseDTO = new LicenseReadDTO(license);
             return CreatedAtAction(nameof(GetLicenseById), new { id = createdLicenseDTO.Id }, createdLicenseDTO);
         }
         [HttpPut("{id}")]
-        public ActionResult<LicenceReadDTO> UpdateLicense(int id, [FromBody] LicenceUpdateDTO licenseDTO)
+        public ActionResult<LicenseReadDTO> UpdateLicense(int id, [FromBody] LicenseUpdateDTO licenseDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the license.");
             }
-            var updatedLicenseDTO = new LicenceReadDTO(existingLicense);
+            var updatedLicenseDTO = new LicenseReadDTO(existingLicense);
             return Ok(updatedLicenseDTO);
         }
         [HttpDelete("{id}"), ProducesResponseType(StatusCodes.Status200OK), ProducesResponseType(StatusCodes.Status500InternalServerError), ProducesResponseType(StatusCodes.Status404NotFound)]

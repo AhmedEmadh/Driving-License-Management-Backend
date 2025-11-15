@@ -53,7 +53,18 @@ namespace Driving_License_Management_BusinessLogicLayer
         private bool _AddNewDriver()
         {
             this.DriverID = clsDriverData.AddNewDriver(this.PersonID, this.CreatedByUserID);
+            if (this.DriverID > 0)
+            {
+                this.CreatedDate = DateTime.Now;
+                _LoadObjectsData();
+            }
             return (this.DriverID > 0);
+        }
+        private bool _LoadObjectsData()
+        {
+            PersonInfo = clsPerson.Find(this.PersonID);
+            CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
+            return (PersonInfo != null && CreatedByUserInfo != null);
         }
         /// <summary>
         /// Updates an existing driver in the system.
@@ -73,7 +84,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             int PersonID = -1, CreatedByUserID = -1;
             DateTime CreatedDate = DateTime.MaxValue;
             bool result = clsDriverData.GetDriverInfoByDriverID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate);
-            if(!result)
+            if (!result)
             {
                 return null;
             }

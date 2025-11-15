@@ -305,6 +305,34 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return isDetained;
         }
+        /// <summary>
+        /// Deletes a detained license from the database.
+        /// </summary>
+        /// <param name="DetainID">The ID of the detained license to delete.</param>
+        /// <returns>True if the detained license is deleted successfully; otherwise, false.</returns>
+        public static bool DeleteDetainedLicense(int DetainID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM DetainedLicenses WHERE DetainID = @DetainID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@DetainID", DetainID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
 
     }
 }

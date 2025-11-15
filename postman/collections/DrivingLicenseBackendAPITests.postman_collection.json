@@ -2,7 +2,8 @@
   "info": {
     "_postman_id": "40fab96f-c1b7-440f-acf4-667c1bf105d3",
     "name": "DrivingLicenseBackendAPITests",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40638503"
   },
   "item": [
     {
@@ -43,8 +44,10 @@
                   }
                 }
               ],
+              "id": "c28021bd-2a9c-4d83-b4e0-ecf247b90b99",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/LicenseClasses",
                   "host": [
@@ -55,7 +58,8 @@
                     "LicenseClasses"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewLicenseClass",
@@ -79,8 +83,10 @@
                   }
                 }
               ],
+              "id": "4b67a51a-cb9c-4da1-98b4-6c227d65b56a",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"name\": \"Any License Class\",\r\n  \"description\": \"Any description\",\r\n  \"minimumAllowedAge\": 30,\r\n  \"defaultValidityLengthInYears\": 10,\r\n  \"classFees\": 400\r\n}",
@@ -100,7 +106,8 @@
                     "LicenseClasses"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "EditLicenseClass",
@@ -125,8 +132,10 @@
                   }
                 }
               ],
+              "id": "c5935c3e-051f-4184-9da5-741ef0d3182c",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"name\": \"Not Any License Class\",\r\n    \"description\": \"Not Any description\",\r\n    \"minimumAllowedAge\": 21,\r\n    \"defaultValidityLengthInYears\": 15,\r\n    \"classFees\": 500\r\n}",
@@ -147,7 +156,8 @@
                     "{{LicenseClassID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetLicenseClassByID",
@@ -174,8 +184,10 @@
                   }
                 }
               ],
+              "id": "30c30562-5468-425f-8166-be5ad9715229",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
                   "host": [
@@ -187,7 +199,8 @@
                     "{{LicenseClassID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteLicenseClass",
@@ -204,8 +217,10 @@
                   }
                 }
               ],
+              "id": "fef1c7da-a16a-407b-9fa5-da884ac945fc",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
                   "host": [
@@ -217,7 +232,8 @@
                     "{{LicenseClassID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetLicenseClassByID",
@@ -234,8 +250,10 @@
                   }
                 }
               ],
+              "id": "fd4e254f-ae17-4c20-8ada-b118022fd94c",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
                   "host": [
@@ -247,9 +265,11 @@
                     "{{LicenseClassID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "1efaae29-bfdc-4457-a7e0-2c3e3ec36973"
         },
         {
           "name": "ApplicationTypes",
@@ -272,8 +292,10 @@
                   }
                 }
               ],
+              "id": "bf604fce-a3d5-496d-9c89-711c3314a390",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/ApplicationTypes",
                   "host": [
@@ -284,7 +306,8 @@
                     "ApplicationTypes"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewApplicationType",
@@ -303,8 +326,10 @@
                   }
                 }
               ],
+              "id": "53b55c38-344c-4357-b72d-ee869f1c7059",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"title\": \"Any Application Type\",\r\n  \"fees\": 100\r\n}",
@@ -324,7 +349,8 @@
                     "ApplicationTypes"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "EditApplicationType",
@@ -341,8 +367,10 @@
                   }
                 }
               ],
+              "id": "d2d8c484-b25a-4b19-80e7-593982b50f4c",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"title\": \"Not Any Application Type\",\r\n    \"fees\": 200\r\n}",
@@ -363,7 +391,8 @@
                     "{{ApplicationTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetApplicationTypeByID",
@@ -384,8 +413,10 @@
                   }
                 }
               ],
+              "id": "d31fa596-57b8-4812-b60d-748a2701a77a",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
                   "host": [
@@ -397,7 +428,8 @@
                     "{{ApplicationTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteApplicationType",
@@ -414,8 +446,10 @@
                   }
                 }
               ],
+              "id": "c71ed2d7-cfee-4892-96fd-ec8dee77c1ab",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
                   "host": [
@@ -427,7 +461,8 @@
                     "{{ApplicationTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetApplicationTypeByID",
@@ -444,8 +479,10 @@
                   }
                 }
               ],
+              "id": "a59589b4-3693-4838-a183-5dfdfd04eb90",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
                   "host": [
@@ -457,9 +494,11 @@
                     "{{ApplicationTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "45bfbf63-6d5e-45b3-8b5f-a16f6570ef5a"
         },
         {
           "name": "Country",
@@ -498,8 +537,10 @@
                   }
                 }
               ],
+              "id": "f83d60ae-75c3-4652-abc1-9ea88784d2aa",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Countries",
                   "host": [
@@ -510,7 +551,8 @@
                     "Countries"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "FindCountryByID",
@@ -540,8 +582,10 @@
                   }
                 }
               ],
+              "id": "2a1a74f2-7356-438e-8e8c-d557f9eac185",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Countries/{{CountryID}}",
                   "host": [
@@ -554,7 +598,8 @@
                   ]
                 },
                 "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
-              }
+              },
+              "response": []
             },
             {
               "name": "FindCountryByName",
@@ -584,8 +629,10 @@
                   }
                 }
               ],
+              "id": "709e0d43-b447-4328-995e-61e0534416e6",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Countries/Name/{{CountryName}}",
                   "host": [
@@ -599,9 +646,11 @@
                   ]
                 },
                 "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "d0db238a-2dd3-4c6f-b876-36a85c7166d7"
         },
         {
           "name": "People",
@@ -638,8 +687,10 @@
                   }
                 }
               ],
+              "id": "12c313fc-6ebb-497a-ac90-18291e41fc09",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/People",
                   "host": [
@@ -650,7 +701,8 @@
                     "People"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewPerson",
@@ -692,8 +744,10 @@
                   }
                 }
               ],
+              "id": "29d2efb5-0696-4b62-9bf6-2234fe28c240",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"nationalNumber\": \"{{NewGUID}}\",\r\n    \"firstName\": \"any FirstName\",\r\n    \"secoundName\": \"any lastName\",\r\n    \"thirdName\": \"any thirdName\",\r\n    \"lastName\": \"any lastName\",\r\n    \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n    \"gender\": \"Male\",\r\n    \"address\": \"any address\",\r\n    \"phoneNumber\": \"567546757\",\r\n    \"email\": \"dfs@sdfg.dssd\",\r\n    \"countryId\": 5,\r\n    \"imageURL\": \"anyUrl.jpg\"\r\n}",
@@ -713,7 +767,8 @@
                     "People"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdatePerson",
@@ -754,8 +809,10 @@
                   }
                 }
               ],
+              "id": "2ce68487-fb03-488c-bb93-14b396a8b35b",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"nationalNumber\": \"{{NewGUID}}\",\r\n  \"firstName\": \"not any FirstName\",\r\n  \"secoundName\": \"not any lastName\",\r\n  \"thirdName\": \"not any thirdName\",\r\n  \"lastName\": \"not any lastName\",\r\n  \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n  \"gender\": \"Female\",\r\n  \"address\": \"not any address\",\r\n  \"phoneNumber\": \"64735674735\",\r\n  \"email\": \"{{NewGUID}}@sdfg.dssd\",\r\n  \"countryId\": 5,\r\n  \"imageURL\": \"notAnyUrl.jpg\"\r\n}",
@@ -776,7 +833,8 @@
                     "{{PersonID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "ReadUpdatedPerson",
@@ -812,8 +870,10 @@
                   }
                 }
               ],
+              "id": "12c4bb73-d485-4f66-8064-3b4fc63536c6",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/People/{{PersonID}}",
                   "host": [
@@ -825,7 +885,8 @@
                     "{{PersonID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeletePerson",
@@ -843,8 +904,10 @@
                   }
                 }
               ],
+              "id": "85cd2773-4255-4609-8457-cbe366f8e011",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/People/{{PersonID}}",
                   "host": [
@@ -856,7 +919,8 @@
                     "{{PersonID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "ReadDeletedPerson",
@@ -873,8 +937,10 @@
                   }
                 }
               ],
+              "id": "2a2bc74c-49ba-4d31-8a46-fb3d682d2241",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/People/{{PersonID}}",
                   "host": [
@@ -886,9 +952,11 @@
                     "{{PersonID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "95c7091d-f736-4299-b07a-c20664a334c7"
         },
         {
           "name": "Users",
@@ -916,8 +984,10 @@
                   }
                 }
               ],
+              "id": "33b59940-c27c-4afc-a75c-1f7d57bf9f54",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Users",
                   "host": [
@@ -928,7 +998,8 @@
                     "Users"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewPerson",
@@ -970,8 +1041,10 @@
                   }
                 }
               ],
+              "id": "7fd9454b-3b0a-4a69-969c-e12949f46193",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"nationalNumber\": \"{{NewGUID}}\",\r\n    \"firstName\": \"any FirstName\",\r\n    \"secoundName\": \"any lastName\",\r\n    \"thirdName\": \"any thirdName\",\r\n    \"lastName\": \"any lastName\",\r\n    \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n    \"gender\": \"Male\",\r\n    \"address\": \"any address\",\r\n    \"phoneNumber\": \"567546757\",\r\n    \"email\": \"dfs@sdfg.dssd\",\r\n    \"countryId\": 5,\r\n    \"imageURL\": \"anyUrl.jpg\"\r\n}",
@@ -991,7 +1064,8 @@
                     "People"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewUser",
@@ -1032,8 +1106,10 @@
                   }
                 }
               ],
+              "id": "31997780-ec69-4df3-bd54-8c4d020ba035",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"userName\": \"{{NewGUID}}\",\r\n  \"password\": \"P@$$w0rd\",\r\n  \"personID\": {{PersonID}}\r\n}",
@@ -1053,7 +1129,8 @@
                     "Users"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdateUser",
@@ -1094,8 +1171,10 @@
                   }
                 }
               ],
+              "id": "475f8d8e-7499-43f0-b62a-6d744f4e7263",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"userName\": \"{{NewUserName}}\",\r\n  \"password\": \"MyP@$$w0rd\",\r\n  \"personID\": {{PersonID}}\r\n}",
@@ -1116,7 +1195,8 @@
                     "{{UserID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetUserByID",
@@ -1148,8 +1228,10 @@
                   }
                 }
               ],
+              "id": "00f2cceb-28b2-44af-8aa7-a14fefbd16cc",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Users/{{UserID}}",
                   "host": [
@@ -1161,7 +1243,8 @@
                     "{{UserID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteUser",
@@ -1178,8 +1261,10 @@
                   }
                 }
               ],
+              "id": "07ee39c6-a91e-447f-ad7c-224d76143e18",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Users/{{UserID}}",
                   "host": [
@@ -1191,7 +1276,8 @@
                     "{{UserID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetUserByID",
@@ -1208,8 +1294,10 @@
                   }
                 }
               ],
+              "id": "2429d0e3-721a-4243-a616-95e395c449b4",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Users/{{UserID}}",
                   "host": [
@@ -1221,9 +1309,11 @@
                     "{{UserID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "f3821f93-976d-49e3-abac-75e353722157"
         },
         {
           "name": "Drivers",
@@ -1251,8 +1341,10 @@
                   }
                 }
               ],
+              "id": "b2f94b49-ee31-42e8-bd44-7ecba73e62f7",
               "request": {
                 "method": "GET",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": ""
@@ -1267,7 +1359,8 @@
                     "Drivers"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewDriver",
@@ -1289,8 +1382,10 @@
                   }
                 }
               ],
+              "id": "16ce59a2-243a-4128-bde4-b003affa76f0",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"personId\": 1,\r\n  \"creatorUserId\": 1\r\n}",
@@ -1310,7 +1405,8 @@
                     "Drivers"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdateDriver",
@@ -1341,8 +1437,10 @@
                   }
                 }
               ],
+              "id": "dca7672a-29f5-4fff-83f9-23f88ee0b2cd",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"personId\": 1023,\r\n    \"creatorUserId\": 15\r\n}",
@@ -1363,7 +1461,8 @@
                     "{{DriverId}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetDriverById",
@@ -1389,8 +1488,10 @@
                   }
                 }
               ],
+              "id": "fc1f9b58-6d8a-4cc3-bbf5-460d63677379",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
                   "host": [
@@ -1402,7 +1503,8 @@
                     "{{DriverId}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteDriver",
@@ -1419,8 +1521,10 @@
                   }
                 }
               ],
+              "id": "2fc00377-ed8c-439d-be01-3d27f0985dcc",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
                   "host": [
@@ -1432,7 +1536,8 @@
                     "{{DriverId}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetDriverByID",
@@ -1449,8 +1554,10 @@
                   }
                 }
               ],
+              "id": "54537247-9d57-42e8-a3ca-feddb5a3e56f",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
                   "host": [
@@ -1462,9 +1569,11 @@
                     "{{DriverId}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "9857a40f-9cbd-464b-ba69-dd58e35a26df"
         },
         {
           "name": "Applications",
@@ -1493,8 +1602,10 @@
                   }
                 }
               ],
+              "id": "dc83380d-1bdf-407d-a011-dcd432c5e494",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Applications",
                   "host": [
@@ -1505,7 +1616,8 @@
                     "Applications"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewApplication",
@@ -1527,8 +1639,10 @@
                   }
                 }
               ],
+              "id": "96f34c02-0502-4a11-b813-e3ad5efecc50",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"applicantPersonID\": 1,\r\n  \"applicationTypeID\": 1,\r\n  \"applicationStatusId\": 1,\r\n  \"paidFees\": 50,\r\n  \"creatorUserID\": 1\r\n}",
@@ -1548,7 +1662,8 @@
                     "Applications"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdateApplication",
@@ -1572,8 +1687,10 @@
                   }
                 }
               ],
+              "id": "0b22fd8c-e37e-4eae-8cb7-1765b10f4576",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    \"applicantPersonID\": 1024,\r\n    \"applicationTypeID\": 2,\r\n    \"applicationStatusId\": 3,\r\n    \"paidFees\": 100,\r\n    \"creatorUserID\": 17\r\n}",
@@ -1594,7 +1711,8 @@
                     "{{ApplicationID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetApplicationByID",
@@ -1620,8 +1738,10 @@
                   }
                 }
               ],
+              "id": "b89707d6-095d-4af0-8a1b-af60e53cf3e4",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
                   "host": [
@@ -1633,7 +1753,8 @@
                     "{{ApplicationID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteApplication",
@@ -1650,8 +1771,10 @@
                   }
                 }
               ],
+              "id": "bd0d1865-6a3d-4ae7-932a-4ce93bd7c0e8",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
                   "host": [
@@ -1663,7 +1786,8 @@
                     "{{ApplicationID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetApplicationByID",
@@ -1681,8 +1805,10 @@
                   }
                 }
               ],
+              "id": "5004b044-525d-472a-a05f-9fcb3da06c20",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
                   "host": [
@@ -1694,9 +1820,11 @@
                     "{{ApplicationID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "96c4a0a0-d5d1-40d0-9d94-afec44bfa9aa"
         },
         {
           "name": "TestTypes",
@@ -1724,8 +1852,10 @@
                   }
                 }
               ],
+              "id": "b2e120a1-cced-4a09-a5a5-e1beaccf1af8",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/TestTypes",
                   "host": [
@@ -1736,7 +1866,8 @@
                     "TestTypes"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewTestType",
@@ -1758,8 +1889,10 @@
                   }
                 }
               ],
+              "id": "5edba9ec-a894-49e8-b46d-b10b50529c4a",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"title\": \"Any Test Type title\",\r\n  \"description\": \"Any Test Type description\",\r\n  \"fees\": 50\r\n}",
@@ -1779,7 +1912,8 @@
                     "TestTypes"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdateTestType",
@@ -1801,8 +1935,10 @@
                   }
                 }
               ],
+              "id": "dbc54e81-2981-403f-a6a8-b61047f0ed63",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"title\": \"Any Test Type title\",\r\n  \"description\": \"Any Test Type description\",\r\n  \"fees\": 50\r\n}",
@@ -1823,7 +1959,8 @@
                     "{{TestTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetTestTypeByID",
@@ -1849,8 +1986,10 @@
                   }
                 }
               ],
+              "id": "bc0c4364-fca6-4ba0-92c8-f33c93f7e903",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
                   "host": [
@@ -1862,7 +2001,8 @@
                     "{{TestTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteTestType",
@@ -1879,8 +2019,10 @@
                   }
                 }
               ],
+              "id": "cf524a53-f0fc-4c65-ac3f-96119a09b92c",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
                   "host": [
@@ -1892,7 +2034,8 @@
                     "{{TestTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetTestTypeByID",
@@ -1909,8 +2052,10 @@
                   }
                 }
               ],
+              "id": "42f56b6e-cf69-4a2a-bdc5-96aa99cbfa66",
               "request": {
                 "method": "GET",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "",
@@ -1931,34 +2076,18 @@
                     "{{TestTypeID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Failed Tests",
-      "item": []
-    },
-    {
-      "name": "Tests In Progress",
-      "item": [
+          ],
+          "id": "009f03c7-b900-43e2-bbd4-b9fb023995be"
+        },
         {
           "name": "Licenses",
           "item": [
             {
               "name": "GetAllLicenses",
               "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
                 {
                   "listen": "test",
                   "script": {
@@ -1977,10 +2106,21 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
+              "id": "5818f7f9-50a1-4013-adae-7b8859678c63",
               "request": {
                 "method": "GET",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "",
@@ -2000,7 +2140,8 @@
                     "Licenses"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "AddNewLicense",
@@ -2031,8 +2172,10 @@
                   }
                 }
               ],
+              "id": "507f2710-60b8-47d5-a1eb-69e769270aa3",
               "request": {
                 "method": "POST",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"applicationId\": 110,\r\n  \"driverId\": 27,\r\n  \"licenseClassId\": 1,\r\n//   \"issueDate\": \"2025-11-15\",\r\n//   \"expiryDate\": \"2025-11-15\",\r\n  \"notes\": \"Any Notes\",\r\n  \"paidFees\": 50,\r\n  \"isActive\": true,\r\n  \"issueReason\": 1,\r\n  \"createdById\": 1\r\n}",
@@ -2052,7 +2195,8 @@
                     "Licenses"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "UpdateLicense",
@@ -2083,8 +2227,10 @@
                   }
                 }
               ],
+              "id": "d08fc72b-e45d-436e-a256-8d26aa4f098a",
               "request": {
                 "method": "PUT",
+                "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n    //\"id\": 0,\r\n    \"applicationId\": 110,\r\n    \"driverId\": 27,\r\n    \"licenseClassId\": 1,\r\n    //   \"issueDate\": \"2025-11-15\",\r\n    //   \"expiryDate\": \"2025-11-15\",\r\n    \"notes\": \"Any Notes\",\r\n    \"paidFees\": 50,\r\n    \"isActive\": true,\r\n    \"issueReason\": 1,\r\n    \"createdById\": 1\r\n}",
@@ -2105,7 +2251,8 @@
                     "{{LicenseID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetLicenseByID",
@@ -2140,8 +2287,10 @@
                   }
                 }
               ],
+              "id": "123f2746-d0f2-4c8b-9655-5a760bdc3f4a",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Licenses/{{LicenseID}}",
                   "host": [
@@ -2153,7 +2302,8 @@
                     "{{LicenseID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "DeleteLicense",
@@ -2179,8 +2329,10 @@
                   }
                 }
               ],
+              "id": "0f77d083-eb7c-46f4-88c8-ad956dca6477",
               "request": {
                 "method": "DELETE",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Licenses/{{LicenseID}}",
                   "host": [
@@ -2192,7 +2344,8 @@
                     "{{LicenseID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             },
             {
               "name": "GetLicenseById",
@@ -2218,8 +2371,10 @@
                   }
                 }
               ],
+              "id": "d5a4e62f-ccc8-45d4-bea4-97e8250e9466",
               "request": {
                 "method": "GET",
+                "header": [],
                 "url": {
                   "raw": "{{DomainName}}/api/Licenses/{{LicenseID}}",
                   "host": [
@@ -2231,11 +2386,281 @@
                     "{{LicenseID}}"
                   ]
                 }
-              }
+              },
+              "response": []
             }
-          ]
+          ],
+          "id": "dc3ac102-972a-4784-88bf-f9544c521a73"
+        },
+        {
+          "name": "DetainedLicenses",
+          "item": [
+            {
+              "name": "GetAllDetainedLicenses",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "b47b3860-e301-4246-b1bb-b80e389b1484",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List have at least one Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "574f65e6-7270-49d1-a212-d6d4cc6da0b0",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewDetainedLicense",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "a3d54e81-9a2f-4101-814a-3734268a9f09",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"DetainedLicenseID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "a1529471-6401-4250-b0ca-4e505b67b7c1",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"licenseId\": 23,\r\n  \"createdByUserId\": 1,\r\n  \"releaseApplicationId\": 115,\r\n  \"fineFees\": 50,\r\n  \"isReleased\": false\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateDetainedLicense",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "6cf16659-f49c-49f1-b0d3-8422e4a1178b",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewFineFees\", pm.response.json().fineFees);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "6f931443-abff-493d-ab40-02c32c39acaa",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"licenseId\": 23,\r\n  \"createdByUserId\": 1,\r\n  \"releasedByUserId\": 1,\r\n  \"releaseApplicationId\": 115,\r\n  \"fineFees\": 500,\r\n  \"isReleased\": false\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses/{{DetainedLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses",
+                    "{{DetainedLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDetainedLicenseById",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "22b593b7-a90a-47b7-942c-0296d5f4a295",
+                    "exec": [
+                      "let NewFineFees = pm.environment.get(\"NewFineFees\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.fineFees).to.eql(NewFineFees);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "41ec68d1-e2ef-4b66-a0de-7df788510a5f",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses/{{DetainedLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses",
+                    "{{DetainedLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeletedDetainedLicense",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "da7db8dc-0ebc-4fe8-a592-aecd3dbbc0f9",
+                    "exec": [
+                      "pm.test(\"Status code is 204\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "576c0311-f3b1-4b8b-a177-6c6044da1ed3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses/{{DetainedLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses",
+                    "{{DetainedLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDetainedLicenseById",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "85a0fa2d-7939-48b9-ba3d-ffc43892092f",
+                    "exec": [
+                      "pm.test(\"Object Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "173f897d-a8f9-4031-84cc-446935fb7973",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/DetainedLicenses/{{DetainedLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "DetainedLicenses",
+                    "{{DetainedLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "0ee5808a-3265-4af3-867f-b132db45f248"
         }
-      ]
+      ],
+      "id": "6cfb5f28-0146-414d-abb4-09e02d85a783"
+    },
+    {
+      "name": "Failed Tests",
+      "item": [],
+      "id": "cc3a562c-cb74-4cb7-a84c-bb06a1a0ae56"
+    },
+    {
+      "name": "Tests In Progress",
+      "item": [],
+      "id": "7de84e3c-1081-4c32-b435-e51d2c353592"
     }
   ]
 }

@@ -688,6 +688,317 @@
         }
       }
     },
+    "/api/DetainedLicenses": {
+      "get": {
+        "tags": [
+          "DetainedLicenses"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DetainedLicenses"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/DetainedLicenses/{id}": {
+      "get": {
+        "tags": [
+          "DetainedLicenses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DetainedLicenses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetainedLicenseUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetainedLicenseReadDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DetainedLicenses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/Drivers": {
       "get": {
         "tags": [
@@ -1192,7 +1503,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LicenceReadDTO"
+                    "$ref": "#/components/schemas/LicenseReadDTO"
                   }
                 }
               },
@@ -1200,7 +1511,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LicenceReadDTO"
+                    "$ref": "#/components/schemas/LicenseReadDTO"
                   }
                 }
               },
@@ -1208,7 +1519,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LicenceReadDTO"
+                    "$ref": "#/components/schemas/LicenseReadDTO"
                   }
                 }
               }
@@ -1224,17 +1535,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             }
           }
@@ -1245,17 +1556,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               }
             }
@@ -1308,17 +1619,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               }
             }
@@ -1364,17 +1675,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LicenceUpdateDTO"
+                "$ref": "#/components/schemas/LicenseUpdateDTO"
               }
             }
           }
@@ -1385,17 +1696,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LicenceReadDTO"
+                  "$ref": "#/components/schemas/LicenseReadDTO"
                 }
               }
             }
@@ -2639,6 +2950,76 @@
         },
         "additionalProperties": false
       },
+      "DetainedLicenseReadDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/UserReadDTO"
+          },
+          "releasedBy": {
+            "$ref": "#/components/schemas/UserReadDTO"
+          },
+          "fineFees": {
+            "type": "number",
+            "format": "float"
+          },
+          "isReleased": {
+            "type": "boolean"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetainedLicenseUpdateDTO": {
+        "required": [
+          "createdByUserId",
+          "fineFees",
+          "licenseId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "licenseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdByUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "releasedByUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "releaseApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fineFees": {
+            "type": "number",
+            "format": "float"
+          },
+          "isReleased": {
+            "type": "boolean"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
       "DriverReadDTO": {
         "type": "object",
         "properties": {
@@ -2923,7 +3304,47 @@
         "type": "integer",
         "format": "int32"
       },
-      "LicenceReadDTO": {
+      "LicenseClassDTO": {
+        "required": [
+          "classFees",
+          "defaultValidityLengthInYears",
+          "minimumAllowedAge",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "minimumAllowedAge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultValidityLengthInYears": {
+            "maximum": 255,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "classFees": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LicenseReadDTO": {
         "type": "object",
         "properties": {
           "id": {
@@ -2966,7 +3387,7 @@
         },
         "additionalProperties": false
       },
-      "LicenceUpdateDTO": {
+      "LicenseUpdateDTO": {
         "required": [
           "applicationId",
           "createdById",
@@ -3013,46 +3434,6 @@
           "createdById": {
             "type": "integer",
             "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LicenseClassDTO": {
-        "required": [
-          "classFees",
-          "defaultValidityLengthInYears",
-          "minimumAllowedAge",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 500,
-            "type": "string",
-            "nullable": true
-          },
-          "minimumAllowedAge": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "defaultValidityLengthInYears": {
-            "maximum": 255,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "classFees": {
-            "type": "number",
-            "format": "float"
           }
         },
         "additionalProperties": false

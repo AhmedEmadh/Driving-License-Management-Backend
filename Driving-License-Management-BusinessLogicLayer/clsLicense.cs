@@ -34,7 +34,7 @@ namespace Driving_License_Management_BusinessLogicLayer
                 return GetIssueReasonText(this.IssueReason);
             }
         }
-        public clsDetainedLicense DetainedInfo { set; get; }
+        //public clsDetainedLicense DetainedInfo { set; get; }
         public int CreatedByUserID { set; get; }
         public clsUser CreatedByUserInfo { set; get; }
         public bool IsDetained
@@ -102,7 +102,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             this.ApplicationInfo = clsApplication.FindBaseApplication(this.ApplicationID);
             this.DriverInfo = clsDriver.FindByDriverID(this.DriverID);
             this.licenseClassInfo = clsLicenseClass.Find(this.LicenseClass);
-            this.DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
+            //this.DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
             this.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
         }
         /// <summary>
@@ -325,7 +325,7 @@ namespace Driving_License_Management_BusinessLogicLayer
 
             }
             ApplicationID = Application.ApplicationID;
-            return this.DetainedInfo.ReleaseDetainedLicense(ReleasedByUserID, Application.ApplicationID);
+            return clsDetainedLicense.FindByLicenseID(this.LicenseID).ReleaseDetainedLicense(ReleasedByUserID, Application.ApplicationID);
 
         }
         /// <summary>

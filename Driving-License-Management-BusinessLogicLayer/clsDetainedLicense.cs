@@ -15,15 +15,17 @@ namespace Driving_License_Management_BusinessLogicLayer
 
         public int DetainID { get; set; }
         public int LicenseID { get; set; }
-        DateTime DetainDate { get; set; }
+        public clsLicense LicenseInfo { get; set; }
+        public DateTime DetainDate { get; private set; }
         public float FineFees { get; set; }
         public int CreatedByUserID { get; set; }
-        clsUser CreatedByUserInfo { get; set; }
+        public clsUser CreatedByUserInfo { get; set; }
         public bool IsReleased { get; set; }
-        DateTime ReleaseDate { get; set; }
-        int ReleasedByUserID { get; set; }
-        clsUser ReleasedByUserInfo { get; set; }
-        int ReleaseApplicationID { get; set; }
+        public DateTime ReleaseDate { get; private set; }
+        public int ReleasedByUserID { get; set; }
+        public clsUser ReleasedByUserInfo { get; set; }
+        public int ReleaseApplicationID { get; set; }
+        public clsApplication ReleaseApplicationInfo { get; set; }
 
         public clsDetainedLicense()
         {
@@ -65,8 +67,7 @@ namespace Driving_License_Management_BusinessLogicLayer
             this.ReleaseDate = ReleaseDate;
             this.ReleasedByUserID = ReleasedByUserID;
             this.ReleaseApplicationID = ReleaseApplicationID;
-            CreatedByUserInfo = clsUser.FindByUserID(CreatedByUserID);
-            ReleasedByUserInfo = clsUser.FindByUserID(ReleasedByUserID);
+            _LoadObjectsData();
             Mode = enMode.Update;
         }
         /// <summary>
@@ -76,7 +77,18 @@ namespace Driving_License_Management_BusinessLogicLayer
         private bool _AddNewDetainedLicense()
         {
             this.DetainID = clsDetainedLicenseData.AddNewDetainedLicense(this.LicenseID, this.DetainDate, this.FineFees, this.CreatedByUserID);
+            if (this.DetainID > 0)
+            {
+                _LoadObjectsData();
+            }
             return (this.DetainID > 0);
+        }
+        private void _LoadObjectsData()
+        {
+            this.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
+            this.ReleasedByUserInfo = clsUser.FindByUserID(this.ReleasedByUserID);
+            this.LicenseInfo = clsLicense.Find(this.LicenseID);
+            this.ReleaseApplicationInfo = clsApplication.FindBaseApplication(this.ReleaseApplicationID);
         }
         /// <summary>
         /// Updates the detained license information in the database.
@@ -84,7 +96,19 @@ namespace Driving_License_Management_BusinessLogicLayer
         /// <returns>True if the update was successful, false otherwise.</returns>
         private bool _UpdateDetainedLicense()
         {
-            return clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, this.LicenseID, this.DetainDate, this.FineFees, this.CreatedByUserID);
+            bool result = clsDetainedLicenseData.UpdateDetainedLicense(this.DetainID, this.LicenseID, this.DetainDate, this.FineFees, this.CreatedByUserID);
+            if (result)
+            {
+                if(this.IsReleased)
+                {
+                    if (ReleaseDate.Year < 1000 || ReleaseDate.Year > 9000)
+                    {
+                        ReleaseDate = DateTime.Now;
+                    }
+                }
+                _LoadObjectsData();
+            }
+            return result;
         }
         /// <summary>
         /// Finds a detained license by its ID.
@@ -178,7 +202,20 @@ namespace Driving_License_Management_BusinessLogicLayer
         /// <returns>True if the license was released successfully, false otherwise.</returns>
         public bool ReleaseDetainedLicense(int ReleasedByUserID, int ReleaseApplicationID)
         {
-            return clsDetainedLicenseData.ReleaseDetainedLicense(this.DetainID, ReleasedByUserID, ReleaseApplicationID);
+            bool Result = clsDetainedLicenseData.ReleaseDetainedLicense(this.DetainID, ReleasedByUserID, ReleaseApplicationID);
+            if (Result)
+            {
+                this.IsReleased = true;
+                this.ReleaseDate = DateTime.Now;
+                this.ReleasedByUserID = ReleasedByUserID;
+                this.ReleaseApplicationID = ReleaseApplicationID;
+                _LoadObjectsData();
+            }
+            return Result;
+        }
+        public bool Delete()
+        {
+            return clsDetainedLicenseData.DeleteDetainedLicense(this.DetainID);
         }
     }
 }
