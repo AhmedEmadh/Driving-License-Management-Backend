@@ -48,7 +48,7 @@ namespace Driving_License_Management_Backend.Controllers
             applicationDTO.id = newApplication.ApplicationID;
             return CreatedAtAction(nameof(GetApplicationById), new { id = newApplication.ApplicationID }, new ApplicationReadDTO(newApplication));
         }
-        [HttpPut("{id}"), ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BadRequestObjectResult)), ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string)), ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string)), ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpPut("{id}"), ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BadRequestObjectResult)), ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string)), ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string)), ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<ApplicationReadDTO> UpdateApplication(int id, [FromBody] ApplicationUpdateDTO applicationDTO)
         {
             applicationDTO.id = id;
