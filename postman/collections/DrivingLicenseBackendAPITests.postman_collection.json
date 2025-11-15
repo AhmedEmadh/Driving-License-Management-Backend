@@ -1,0 +1,2236 @@
+{
+  "info": {
+    "_postman_id": "40fab96f-c1b7-440f-acf4-667c1bf105d3",
+    "name": "DrivingLicenseBackendAPITests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Passes Tests",
+      "item": [
+        {
+          "name": "LicenseClasses",
+          "item": [
+            {
+              "name": "GetAllLicenseClasses",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"NotEmpty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"ObjectsExists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "6403bce8-f18e-4f53-aab9-08492e3b9c5f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewLicenseClass",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let ID = pm.response.json().id;\r",
+                      "pm.globals.set(\"LicenseClassID\", ID);\r",
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "d3180cf8-a445-4cca-b99d-f763fa4dd2a9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Any License Class\",\r\n  \"description\": \"Any description\",\r\n  \"minimumAllowedAge\": 30,\r\n  \"defaultValidityLengthInYears\": 10,\r\n  \"classFees\": 400\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditLicenseClass",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "\r",
+                      "let LicenseClassNewName = pm.response.json().name;\r",
+                      "pm.globals.set(\"LicenseClassNewName\",LicenseClassNewName);\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "403c562f-d2e3-4ab2-a3d2-6124a712d075",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Not Any License Class\",\r\n    \"description\": \"Not Any description\",\r\n    \"minimumAllowedAge\": 21,\r\n    \"defaultValidityLengthInYears\": 15,\r\n    \"classFees\": 500\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses",
+                    "{{LicenseClassID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetLicenseClassByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let LicenseClassNewName = pm.globals.get(\"LicenseClassNewName\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"ObjectsExists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Changed\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.name).to.eql(LicenseClassNewName);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9f4660ac-4976-4dac-a926-a8722bf3dfc1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses",
+                    "{{LicenseClassID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteLicenseClass",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "1959ec76-bf34-4286-b50d-0b0383760352",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses",
+                    "{{LicenseClassID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetLicenseClassByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "15e35cdf-4017-4596-874b-ecb4bdb00650",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LicenseClasses/{{LicenseClassID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LicenseClasses",
+                    "{{LicenseClassID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "b8cbdb57-5831-4bb8-bf1d-cbc84dd83849"
+        },
+        {
+          "name": "ApplicationTypes",
+          "item": [
+            {
+              "name": "GetAllApplicationTypes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Not Empty\", function () {\r",
+                      "    pm.expect(pm.response.json().length).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "628ab7aa-4b4d-4dd4-8a07-26e7d3ae8e2c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewApplicationType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var ApplicationTypeID = pm.response.json().id;\r",
+                      "pm.globals.set(\"ApplicationTypeID\", ApplicationTypeID);\r",
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "483ba687-08d1-4156-9709-ec5e0dd019a0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Any Application Type\",\r\n  \"fees\": 100\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditApplicationType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "7f830a4e-d1ac-4b24-9342-4d2b37fc00cd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Not Any Application Type\",\r\n    \"fees\": 200\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes",
+                    "{{ApplicationTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetApplicationTypeByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "92bada68-5f12-4f0c-aab0-e082deb79d18",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes",
+                    "{{ApplicationTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteApplicationType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9f78923a-38fc-4c05-b1f6-96c0d40773bc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes",
+                    "{{ApplicationTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetApplicationTypeByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "44f9271b-a4f3-4521-9bcc-ae149c92aaec",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/ApplicationTypes/{{ApplicationTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ApplicationTypes",
+                    "{{ApplicationTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "723dbbaf-9e72-4c34-9254-3d52cd34b944"
+        },
+        {
+          "name": "Country",
+          "item": [
+            {
+              "name": "GetAllCountries",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].ID).greaterThan(0);\r",
+                      "});\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "bb6966ad-c0c5-4514-9f71-7984173d68e6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Countries",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Countries"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "FindCountryByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.ID).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "12e5da96-a721-49a2-bdf4-f8854fac7072",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Countries/{{CountryID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Countries",
+                    "{{CountryID}}"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "FindCountryByName",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.ID).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "2f856267-a903-4b07-98ab-0212cccfa6e4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Countries/Name/{{CountryName}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Countries",
+                    "Name",
+                    "{{CountryName}}"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            }
+          ],
+          "id": "2879af6d-d5ca-44ec-9012-cc52d99ba2a9"
+        },
+        {
+          "name": "People",
+          "item": [
+            {
+              "name": "GetAllPeople",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Contains Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "ea4496c0-97ac-49e8-92d8-bfeb1a746706",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/People",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewPerson",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function generateUUID() {\r",
+                      "    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\r",
+                      "        let r = Math.random() * 16 | 0;\r",
+                      "        let v = c === 'x' ? r : (r & 0x3 | 0x8);\r",
+                      "        return v.toString(16);\r",
+                      "    });\r",
+                      "}\r",
+                      "// Generate a UUID\r",
+                      "let newGuid = generateUUID().substring(10,18);\r",
+                      "pm.environment.set(\"NewGUID\",newGuid);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let PersonID = pm.response.json().id;\r",
+                      "pm.environment.set(\"PersonID\",PersonID);\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "cc505f23-6acf-49da-81a2-a6fdd0ac1547",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nationalNumber\": \"{{NewGUID}}\",\r\n    \"firstName\": \"any FirstName\",\r\n    \"secoundName\": \"any lastName\",\r\n    \"thirdName\": \"any thirdName\",\r\n    \"lastName\": \"any lastName\",\r\n    \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n    \"gender\": \"Male\",\r\n    \"address\": \"any address\",\r\n    \"phoneNumber\": \"567546757\",\r\n    \"email\": \"dfs@sdfg.dssd\",\r\n    \"countryId\": 5,\r\n    \"imageURL\": \"anyUrl.jpg\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/People",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdatePerson",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let nationalNumber = pm.response.json().nationalNumber;\r",
+                      "pm.environment.set(\"NewNationalNumber\",nationalNumber);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function generateUUID() {\r",
+                      "    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\r",
+                      "        let r = Math.random() * 16 | 0;\r",
+                      "        let v = c === 'x' ? r : (r & 0x3 | 0x8);\r",
+                      "        return v.toString(16);\r",
+                      "    });\r",
+                      "}\r",
+                      "// Generate a UUID\r",
+                      "let newGuid = generateUUID().substring(10,18);\r",
+                      "pm.environment.set(\"NewGUID\", newGuid);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "a96849db-d8f6-4727-a1db-85fe11b49ac1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"nationalNumber\": \"{{NewGUID}}\",\r\n  \"firstName\": \"not any FirstName\",\r\n  \"secoundName\": \"not any lastName\",\r\n  \"thirdName\": \"not any thirdName\",\r\n  \"lastName\": \"not any lastName\",\r\n  \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n  \"gender\": \"Female\",\r\n  \"address\": \"not any address\",\r\n  \"phoneNumber\": \"64735674735\",\r\n  \"email\": \"{{NewGUID}}@sdfg.dssd\",\r\n  \"countryId\": 5,\r\n  \"imageURL\": \"notAnyUrl.jpg\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/People/{{PersonID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People",
+                    "{{PersonID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ReadUpdatedPerson",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let NewNationalNumber = pm.environment.get(\"NewNationalNumber\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Changed\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.nationalNumber).to.eql(NewNationalNumber);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "a6f7b9cc-121f-4e26-8d78-ed6ba5663293",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/People/{{PersonID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People",
+                    "{{PersonID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeletePerson",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "dcab5c79-63da-4ed1-b335-479cb2679d04",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/People/{{PersonID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People",
+                    "{{PersonID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ReadDeletedPerson",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "312633c6-6436-4bc2-a4d5-9d27c5cc867c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/People/{{PersonID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People",
+                    "{{PersonID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "76448b73-13a6-47c9-8e6a-a23977c850e1"
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "GetAllUsers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Contains Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "c9546fc6-fbec-4462-ad56-99fd09ce6678",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Users",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewPerson",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function generateUUID() {\r",
+                      "    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\r",
+                      "        let r = Math.random() * 16 | 0;\r",
+                      "        let v = c === 'x' ? r : (r & 0x3 | 0x8);\r",
+                      "        return v.toString(16);\r",
+                      "    });\r",
+                      "}\r",
+                      "// Generate a UUID\r",
+                      "let newGuid = generateUUID().substring(10,18);\r",
+                      "pm.environment.set(\"NewGUID\",newGuid);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let PersonID = pm.response.json().id;\r",
+                      "pm.environment.set(\"PersonID\",PersonID);\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9ccc6c61-724e-4c22-ae7c-23a83f40d959",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nationalNumber\": \"{{NewGUID}}\",\r\n    \"firstName\": \"any FirstName\",\r\n    \"secoundName\": \"any lastName\",\r\n    \"thirdName\": \"any thirdName\",\r\n    \"lastName\": \"any lastName\",\r\n    \"dateOfBirth\": \"2015-11-11T22:21:30.246Z\",\r\n    \"gender\": \"Male\",\r\n    \"address\": \"any address\",\r\n    \"phoneNumber\": \"567546757\",\r\n    \"email\": \"dfs@sdfg.dssd\",\r\n    \"countryId\": 5,\r\n    \"imageURL\": \"anyUrl.jpg\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/People",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "People"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Objects Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let UserID = pm.response.json().id;\r",
+                      "pm.environment.set(\"UserID\", UserID);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function generateUUID() {\r",
+                      "    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\r",
+                      "        let r = Math.random() * 16 | 0;\r",
+                      "        let v = c === 'x' ? r : (r & 0x3 | 0x8);\r",
+                      "        return v.toString(16);\r",
+                      "    });\r",
+                      "}\r",
+                      "// Generate a UUID\r",
+                      "let newGuid = generateUUID().substring(10,18);\r",
+                      "pm.environment.set(\"NewGUID\",newGuid);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "cd162c8c-800b-4dc4-b2c0-9bead1a90b77",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"userName\": \"{{NewGUID}}\",\r\n  \"password\": \"P@$$w0rd\",\r\n  \"personID\": {{PersonID}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Users",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let NewUserName = pm.response.json().userName;\r",
+                      "pm.environment.set(\"NewUserName\", NewUserName);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function generateUUID() {\r",
+                      "    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\r",
+                      "        let r = Math.random() * 16 | 0;\r",
+                      "        let v = c === 'x' ? r : (r & 0x3 | 0x8);\r",
+                      "        return v.toString(16);\r",
+                      "    });\r",
+                      "}\r",
+                      "// Generate a UUID\r",
+                      "let newGuid = generateUUID().substring(10,18);\r",
+                      "pm.environment.set(\"NewUserName\",newGuid);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "cf607951-cea0-4f26-80dd-b871d2160d8b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"userName\": \"{{NewUserName}}\",\r\n  \"password\": \"MyP@$$w0rd\",\r\n  \"personID\": {{PersonID}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Users/{{UserID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    "{{UserID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetUserByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let NewUserName = pm.environment.get(\"NewUserName\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"User Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.userName).to.eql(NewUserName);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "565e5b04-6738-4a3d-bb92-0696db2572ff",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Users/{{UserID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    "{{UserID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "8b5d2e1c-2f05-47a6-ba4b-e240e7ec9489",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Users/{{UserID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    "{{UserID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetUserByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "55a26c6b-d5e0-4dfe-acf3-3e61ba66e45a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Users/{{UserID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    "{{UserID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "6caa30b7-9734-420a-99da-b6d0ea80c553"
+        },
+        {
+          "name": "Drivers",
+          "item": [
+            {
+              "name": "GetAllDrivers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Have Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "34b10197-03e8-49e7-87c0-04c147d16478",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewDriver",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"DriverId\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "4cadb50c-1de8-4194-ae00-bab4dea4e905",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"personId\": 1,\r\n  \"creatorUserId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateDriver",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewDriverPersonID\",pm.response.json().personalInformation.id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "01bf4037-9450-4be6-a777-ee6237135e37",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"personId\": 1023,\r\n    \"creatorUserId\": 15\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers",
+                    "{{DriverId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDriverById",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let NewDriverPersonID = pm.environment.get(\"NewDriverPersonID\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.personalInformation.id).to.eql(NewDriverPersonID);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "04ef1c8c-8f37-430a-b438-2da589651030",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers",
+                    "{{DriverId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteDriver",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "3b5c2836-5859-44d3-aa97-0e194035d04a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers",
+                    "{{DriverId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDriverByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "063b0d93-5cbc-4e3f-a992-437490b3c785",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Drivers/{{DriverId}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Drivers",
+                    "{{DriverId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "26587959-3a2e-4371-b982-012287a3bb5a"
+        },
+        {
+          "name": "Applications",
+          "item": [
+            {
+              "name": "GetAllApplications",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"List Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Have Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "a05ff86e-4a79-44a3-8625-cb263b328b96",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewApplication",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"ApplicationID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "3234aa01-3749-4966-9942-b044ab443f7e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"applicantPersonID\": 1,\r\n  \"applicationTypeID\": 1,\r\n  \"applicationStatusId\": 1,\r\n  \"paidFees\": 50,\r\n  \"creatorUserID\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateApplication",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "let NewApplicantPersonId = pm.response.json().applicantPersonID;\r",
+                      "pm.environment.set(\"NewApplicantPersonId\", NewApplicantPersonId);\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "33193215-3ebf-479d-955e-074b5f0648b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"applicantPersonID\": 1024,\r\n    \"applicationTypeID\": 2,\r\n    \"applicationStatusId\": 3,\r\n    \"paidFees\": 100,\r\n    \"creatorUserID\": 17\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications",
+                    "{{ApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetApplicationByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let NewApplicantPersonId = pm.environment.get(\"NewApplicantPersonId\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object Exists\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.applicantPersonID).to.eql(NewApplicantPersonId);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "48df68c2-5a72-434a-a18c-d955a8b43115",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications",
+                    "{{ApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteApplication",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "0d68e525-44b3-4d3a-948a-db1c50784f20",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications",
+                    "{{ApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetApplicationByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "d952866e-945f-43ac-a5c7-e09cbc441872",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Applications/{{ApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Applications",
+                    "{{ApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "36ecf66c-1739-417c-ae05-f849c5605401"
+        },
+        {
+          "name": "TestTypes",
+          "item": [
+            {
+              "name": "GetAllTestTypes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"ListContainsObject\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "264a3706-c7ef-4b98-b959-e11b7028eca1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewTestType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"TestTypeID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "439f168c-5eaa-4fb7-b95b-a947488007fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Any Test Type title\",\r\n  \"description\": \"Any Test Type description\",\r\n  \"fees\": 50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateTestType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewTestTypeTitle\",pm.response.json().title);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "f5fe80e4-6818-49e1-b433-ee21a52335e6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Any Test Type title\",\r\n  \"description\": \"Any Test Type description\",\r\n  \"fees\": 50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes",
+                    "{{TestTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestTypeByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let NewTestTypeTitle = pm.environment.get(\"NewTestTypeTitle\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.title).to.eql(NewTestTypeTitle);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "ba32df87-e3bb-4bb6-bcde-ee19ee349afc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes",
+                    "{{TestTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteTestType",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "b87c2d83-85de-4938-89e6-d1e572bf333c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes",
+                    "{{TestTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestTypeByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Object Deleted\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "41b87930-43d7-4d56-8439-cbbba8829311",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestTypes/{{TestTypeID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestTypes",
+                    "{{TestTypeID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "64d525b7-3284-42c0-891a-801ac8656bc3"
+        }
+      ],
+      "id": "9c97c4da-bc2b-41c0-bd7d-c5d70a4f1b83"
+    },
+    {
+      "name": "Failed Tests",
+      "item": [],
+      "id": "d0a61749-eb13-4b8d-9bd1-e11be22df70a"
+    },
+    {
+      "name": "Tests In Progress",
+      "item": [],
+      "id": "dffa51f7-4924-49be-b772-66b4c8110c3f"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "4607f128-c8d7-48e9-8675-4441ce0a5424",
+  "name": "Globals",
+  "values": [
+    {
+      "key": "LicenseClassID",
+      "value": "",
+      "enabled": true,
+      "type": "any",
+      "description": ""
+    },
+    {
+      "key": "LicenseClassNewName",
+      "value": "",
+      "enabled": true,
+      "type": "any",
+      "description": ""
+    },
+    {
+      "key": "ApplicationTypeID",
+      "value": "",
+      "enabled": true,
+      "type": "any",
+      "description": ""
+    }
+  ],
+  "_postman_variable_scope": "globals",
+  "_postman_exported_at": "2025-11-14T23:45:23.299Z",
+  "_postman_exported_using": "Postman/11.0.0"
+}
