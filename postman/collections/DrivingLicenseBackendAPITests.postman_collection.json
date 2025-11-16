@@ -2648,6 +2648,352 @@
             }
           ],
           "id": "0ee5808a-3265-4af3-867f-b132db45f248"
+        },
+        {
+          "name": "InternationalLicenses",
+          "item": [
+            {
+              "name": "GetAllInternationalLicenses",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "bd3314a0-03fe-4c20-9d2f-1a299c855844",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Contains Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "7d441704-0d9b-4530-ac25-a278a8e2b40d",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "759cd363-31e7-4245-b89d-d884c531775a",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"applicantId\": 1023,\r\n  \"driverId\": 9,\r\n  \"issuedUsingLocalLicenseID\": 24,\r\n  \"expiryDate\": \"2025-11-16\",\r\n  \"isActive\": true,\r\n  \"createdByUserId\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewInternationalLicense",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "9c4b8dcb-8505-48ab-88ef-c19d0ecdeb2f",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "f687dc5e-a468-4094-824e-304228704fd1",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"InternationalLicenseID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "02586105-6a11-44d8-a8c9-115cf86bc703",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"applicantId\": 1023,\r\n  \"driverId\": 9,\r\n  \"issuedUsingLocalLicenseID\": 24,\r\n  \"expiryDate\": \"2035-11-17\",\r\n  \"isActive\": true,\r\n  \"createdByUserId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateInternationalLicense",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "e602a0a8-bbd3-4089-9f64-a5ff1f11c474",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0cad5a56-1284-4056-9311-8328a4346f18",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewisActive\",pm.response.json().isActive);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "57db6d42-e3e1-46e1-9ab2-e72e36382761",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"applicantId\": 1023,\r\n  \"driverId\": 9,\r\n  \"issuedUsingLocalLicenseID\": 24,\r\n  \"expiryDate\": \"2036-11-17\",\r\n  \"isActive\": false,\r\n  \"createdByUserId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses/{{InternationalLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses",
+                    "{{InternationalLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetInternationalLicenseByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "b3be1107-d6cc-4c49-bb94-191819cd058f",
+                    "exec": [
+                      "let NewisActive = pm.environment.get(\"NewisActive\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.isActive).to.eql(NewisActive);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "a148e9d4-8639-4b37-84fe-f61301d2c046",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "027b3c8c-c3d5-41ee-a3ed-3fc6dc89a139",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses/{{InternationalLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses",
+                    "{{InternationalLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteInternationalLicense",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "55ac863c-6dca-4cb4-9c00-8314aedba92a",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "cfa88d83-8bd8-4c76-8b1d-be9cbd0345ec",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "eaf085c5-8c3f-436a-becc-8b66bb3f6a3a",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses/{{InternationalLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses",
+                    "{{InternationalLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetInternationalLicenseById",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "4078d01a-1d56-4c06-b769-bcd7707e4958",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "dd561a05-da26-45a1-b1a1-15f3bb77d2ee",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "5b5aa850-9e1c-49a9-a722-66dd04216ffd",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/InternationalLicenses/{{InternationalLicenseID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "InternationalLicenses",
+                    "{{InternationalLicenseID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "603a31bd-a212-47f4-8847-bc6bd65f7d30"
         }
       ],
       "id": "6cfb5f28-0146-414d-abb4-09e02d85a783"

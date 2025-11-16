@@ -88,7 +88,8 @@ namespace Driving_License_Management_BusinessLogicLayer
             this.CreatedByUserID = CreatedByUserID;
 
             this.DriverInfo = clsDriver.FindByDriverID(this.DriverID);
-
+            this.ApplicantPersonInfo = clsPerson.Find(this.ApplicantPersonID);
+            this.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
             Mode = enMode.Update;
         }
         /// <summary>
@@ -234,6 +235,10 @@ namespace Driving_License_Management_BusinessLogicLayer
         public static DataTable GetDriverInternationalLicenses(int DriverID)
         {
             return clsInternationalLicenseData.GetDriverInternationalLicenses(DriverID);
+        }
+        public bool Delete()
+        {
+            return clsInternationalLicenseData.DeleteInternationalLicense(this.InternationalLicenseID);
         }
     }
 }

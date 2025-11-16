@@ -230,5 +230,30 @@ namespace Driving_License_Management_DataAccessLayer
             }
             return ID;
         }
+
+        public static bool DeleteInternationalLicense(int InternationalLicenseID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM InternationalLicenses WHERE InternationalLicenseID = @InternationalLicenseID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@InternationalLicenseID", InternationalLicenseID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+                isSuccess = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }
