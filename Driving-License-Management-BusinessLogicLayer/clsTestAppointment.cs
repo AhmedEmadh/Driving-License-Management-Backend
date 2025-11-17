@@ -110,8 +110,9 @@ namespace Driving_License_Management_BusinessLogicLayer
         {
             //call DataAccess Layer 
 
-            return clsTestAppointmentData.UpdateTestAppointment(this.TestAppointmentID, (int)this.TestTypeID, this.LocalDrivingLicenseApplicationID,
+            bool result = clsTestAppointmentData.UpdateTestAppointment(this.TestAppointmentID, (int)this.TestTypeID, this.LocalDrivingLicenseApplicationID,
                 this.AppointmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked, this.RetakeTestApplicationID);
+            return result;
         }
         /// <summary>
         /// Finds a test appointment by its ID.
@@ -228,6 +229,10 @@ namespace Driving_License_Management_BusinessLogicLayer
         private int _GetTestID()
         {
             return clsTestAppointmentData.GetTestID(TestAppointmentID);
+        }
+        public bool Delete()
+        {
+            return clsTestAppointmentData.DeleteTestAppointment(this.TestAppointmentID);
         }
     }
 }

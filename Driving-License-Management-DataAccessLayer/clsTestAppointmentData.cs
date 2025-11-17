@@ -201,7 +201,7 @@ namespace Driving_License_Management_DataAccessLayer
             command.Parameters.AddWithValue("@PaidFees", PaidFees);
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
 
-            if (RetakeTestApplicationID == -1)
+            if (RetakeTestApplicationID <= 0)
 
                 command.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
             else
@@ -261,7 +261,7 @@ namespace Driving_License_Management_DataAccessLayer
             cmd.Parameters.AddWithValue("@PaidFees", PaidFees);
             cmd.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
             cmd.Parameters.AddWithValue("@IsLocked", IsLocked);
-            cmd.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID != -1 ? RetakeTestApplicationID : (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID > 0 ? RetakeTestApplicationID : (object)DBNull.Value);
             try
             {
                 conn.Open();
@@ -310,6 +310,28 @@ namespace Driving_License_Management_DataAccessLayer
                 conn.Close();
             }
             return TestID;
+        }
+        public static bool DeleteTestAppointment(int TestAppointmentID)
+        {
+            bool result = false;
+            SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            SqlCommand cmd = new SqlCommand("DELETE FROM TestAppointments WHERE TestAppointmentID = @TestAppointmentID", conn);
+            cmd.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            try
+            {
+                conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                result = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
         }
     }
 }

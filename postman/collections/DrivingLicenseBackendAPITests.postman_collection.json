@@ -315,14 +315,18 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "3174f799-6fd2-4aa8-8dd2-a671a3783e26",
                     "exec": [
                       "var ApplicationTypeID = pm.response.json().id;\r",
                       "pm.globals.set(\"ApplicationTypeID\", ApplicationTypeID);\r",
                       "pm.test(\"Status code is 201\", function () {\r",
                       "    pm.response.to.have.status(201);\r",
-                      "});"
+                      "});\r",
+                      "pm.environment.set(\"ApplicationTypeID\",pm.response.json().id);"
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -358,12 +362,15 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "169f43dd-3a76-4944-b1f7-b531a778df47",
                     "exec": [
                       "pm.test(\"Status code is 200\", function () {\r",
                       "    pm.response.to.have.status(200);\r",
                       "});"
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -3348,6 +3355,346 @@
             }
           ],
           "id": "d4a2d701-0703-413e-97db-d13b960c2723"
+        },
+        {
+          "name": "TestAppointments",
+          "item": [
+            {
+              "name": "GetAllTestAppointments",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "02849701-3047-438c-a47d-afe90ed9bc87",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List have at least one Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "9416e963-9437-48ae-adeb-8e58099c3d9a",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewLocalDrivingLicenseApplication",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "f4dfc4da-3ca0-4126-990a-c62e582976c6",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "61058527-a9d7-4479-aeee-70741ff591c1",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.localDrivingLicenseApplicationId).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"LocalDrivingLicenseApplicationID\",pm.response.json().localDrivingLicenseApplicationId);\r",
+                      "pm.environment.set(\"NewApplicationID\",pm.response.json().applicationId);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "aa6abc43-0d60-4142-b433-f2473bc53eaa",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n//   \"applicationID\": 0,\r\n  \"applicantPersonID\": 1,\r\n  \"applicationTypeID\": 1,\r\n  \"applicationStatusId\": 1,\r\n  \"paidFees\": 50,\r\n  \"creatorUserID\": 1,\r\n//   \"localDrivingLicenseApplicationId\": 0,\r\n//   \"createdUsingApplicationId\": 0,\r\n  \"licenseClassId\": 2\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewTestAppointment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ec9e9f67-4f4c-41ee-88de-5772b49b7a44",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"TestAppointmentID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "a467280c-44cd-4e03-a65c-bed1113cdc9f",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"testTypeID\": 1,\r\n  \"localDrivingLicenseApplicationID\": {{LocalDrivingLicenseApplicationID}},\r\n  \"appointmentDate\": \"2025-11-27T10:46:17\",\r\n  \"isLocked\": false,\r\n  \"paidFees\": 50,\r\n  \"createdByUserID\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateTestAppointment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "a9958390-3937-4117-b618-e98643ad2762",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewIsLocked\",pm.response.json().isLocked);\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "a4c9fc68-d606-4469-a1b0-64297b9bde51",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"testTypeID\": 1,\r\n  \"localDrivingLicenseApplicationID\": 60,\r\n  \"appointmentDate\": \"2025-11-29T10:46:17\",\r\n  \"isLocked\": true,\r\n  \"paidFees\": 50,\r\n  \"createdByUserID\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments/{{TestAppointmentID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments",
+                    "{{TestAppointmentID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestAppointmentByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9136c4bf-38a2-40c0-8c8b-14f7db79c2ac",
+                    "exec": [
+                      "let NewIsLocked = pm.environment.get(\"NewIsLocked\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.isLocked).to.eql(NewIsLocked);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "3ff150d4-0260-4ca6-9f07-bd0b636a49f7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments/{{TestAppointmentID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments",
+                    "{{TestAppointmentID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteTestAppointment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "3afdb688-e33c-4207-959e-1b2c995792b4",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "4b168caa-92ed-4a74-abc9-40c7d78a2f09",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments/{{TestAppointmentID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments",
+                    "{{TestAppointmentID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestAppointmentByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "7fb8ec66-93bc-4853-91ed-c6137bda7884",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "4f082f0d-c511-425a-b47d-ef95dbc6a688",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/TestAppointments/{{TestAppointmentID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "TestAppointments",
+                    "{{TestAppointmentID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "53a7ae81-6298-4175-a126-619bc0936183"
         }
       ],
       "id": "6cfb5f28-0146-414d-abb4-09e02d85a783"
