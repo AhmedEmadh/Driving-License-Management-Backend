@@ -3695,6 +3695,288 @@
             }
           ],
           "id": "53a7ae81-6298-4175-a126-619bc0936183"
+        },
+        {
+          "name": "Tests",
+          "item": [
+            {
+              "name": "GetAllTests",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d2dc951a-7e23-4d24-9966-d9f666cf242e",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List have at least one Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "53e74537-4276-4602-bc78-5eb16097f8b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"testTypeID\": 1,\r\n  \"localDrivingLicenseApplicationID\": {{LocalDrivingLicenseApplicationID}},\r\n  \"appointmentDate\": \"2025-11-27T10:46:17\",\r\n  \"isLocked\": false,\r\n  \"paidFees\": 50,\r\n  \"createdByUserID\": 1\r\n}"
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewTest",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "88702727-db03-4767-aab2-8e747e05fb2e",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"TestID\",pm.response.json().id);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "875841af-4075-4976-8108-6935857ac978",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"testAppointmentID\": 116,\r\n  \"testResult\": true,\r\n  \"notes\": \"any notes\",\r\n  \"createdByUserID\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateTest",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d3421fdd-16f6-42c2-918b-f01437f280a1",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewTestNotes\",pm.response.json().notes);\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "e82ee8a9-0b0a-4dba-9e34-c2c4b9f368af",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"testAppointmentID\": 116,\r\n  \"testResult\": true,\r\n  \"notes\": \"not any notes\",\r\n  \"createdByUserID\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests/{{TestID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests",
+                    "{{TestID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "adbec794-46f4-4801-933a-6f51c205551d",
+                    "exec": [
+                      "let NewTestNotes = pm.environment.get(\"NewTestNotes\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.notes).to.eql(NewTestNotes);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "fdd63576-04b3-4230-866c-69f14c2fc8e4",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests/{{TestID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests",
+                    "{{TestID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteTest",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d7cc4a44-a047-426a-af79-3c92b5fa1ec0",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "ad3f7bf3-0d4b-4f5c-932a-648daff5cf0d",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests/{{TestID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests",
+                    "{{TestID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetTestByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "cbc5aadd-6837-407c-8e44-1a81705629a6",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "1fda64c7-04ea-4960-9f70-55010b0bae20",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/Tests/{{TestID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Tests",
+                    "{{TestID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "43fdfa4b-574f-40a8-9ab6-a589aec8a876"
         }
       ],
       "id": "6cfb5f28-0146-414d-abb4-09e02d85a783"

@@ -292,5 +292,28 @@ namespace Driving_License_Management_DataAccessLayer
             return PassedTestCount;
         }
 
+        public static bool DeleteTest(int TestID)
+        {
+            bool isSuccess = false;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            string query = "DELETE FROM Tests WHERE TestID = @TestID";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestID", TestID);
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                isSuccess = (bool)(rowsAffected > 0);
+            }
+            catch (Exception ex)
+            {
+                clsLogger.Log(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isSuccess;
+        }
     }
 }

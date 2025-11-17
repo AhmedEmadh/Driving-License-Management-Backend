@@ -217,6 +217,9 @@ namespace Driving_License_Management_BusinessLogicLayer
             //if total passed test less than 3 it will return false otherwise will return true
             return GetPassedTestCount(LocalDrivingLicenseApplicationID) == 3;
         }
-
+        public bool Delete()
+        {
+            return clsTestData.DeleteTest(TestID);
+        }
     }
 }
