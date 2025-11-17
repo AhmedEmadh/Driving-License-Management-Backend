@@ -1584,6 +1584,7 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "cdd000aa-b1cb-42c6-a4c0-960a1ee39b4d",
                     "exec": [
                       "pm.test(\"Status code is 200\", function () {\r",
                       "    pm.response.to.have.status(200);\r",
@@ -1595,10 +1596,12 @@
                       "});\r",
                       "pm.test(\"List Have Object\", function () {\r",
                       "    var jsonData = pm.response.json();\r",
-                      "    pm.expect(jsonData[0].id).greaterThan(0);\r",
+                      "    pm.expect(jsonData[0].applicationId).greaterThan(0);\r",
                       "});"
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -1625,17 +1628,20 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "0ebdf0ad-78e8-4fb0-9ce3-fab67f34ce26",
                     "exec": [
                       "pm.test(\"Status code is 201\", function () {\r",
                       "    pm.response.to.have.status(201);\r",
                       "});\r",
                       "pm.test(\"Object Exists\", function () {\r",
                       "    var jsonData = pm.response.json();\r",
-                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "    pm.expect(jsonData.applicationId).greaterThan(0);\r",
                       "});\r",
-                      "pm.environment.set(\"ApplicationID\",pm.response.json().id);"
+                      "pm.environment.set(\"ApplicationID\",pm.response.json().applicationId);"
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -1671,19 +1677,22 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "ba6a230c-c035-495d-b227-8ad585fbd2cf",
                     "exec": [
                       "pm.test(\"Status code is 200\", function () {\r",
                       "    pm.response.to.have.status(200);\r",
                       "});\r",
                       "pm.test(\"Object Exists\", function () {\r",
                       "    var jsonData = pm.response.json();\r",
-                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "    pm.expect(jsonData.applicationId).greaterThan(0);\r",
                       "});\r",
                       "let NewApplicantPersonId = pm.response.json().applicantPersonID;\r",
                       "pm.environment.set(\"NewApplicantPersonId\", NewApplicantPersonId);\r",
                       ""
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -1720,6 +1729,7 @@
                 {
                   "listen": "test",
                   "script": {
+                    "id": "49abd1ef-a9ea-4183-8159-132bbbd03613",
                     "exec": [
                       "let NewApplicantPersonId = pm.environment.get(\"NewApplicantPersonId\");\r",
                       "pm.test(\"Status code is 200\", function () {\r",
@@ -1727,14 +1737,16 @@
                       "});\r",
                       "pm.test(\"Object Exists\", function () {\r",
                       "    var jsonData = pm.response.json();\r",
-                      "    pm.expect(jsonData.id).greaterThan(0);\r",
+                      "    pm.expect(jsonData.applicationId).greaterThan(0);\r",
                       "});\r",
                       "pm.test(\"Object Updated\", function () {\r",
                       "    var jsonData = pm.response.json();\r",
                       "    pm.expect(jsonData.applicantPersonID).to.eql(NewApplicantPersonId);\r",
                       "});"
                     ],
-                    "type": "text/javascript"
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
                   }
                 }
               ],
@@ -2994,6 +3006,348 @@
             }
           ],
           "id": "603a31bd-a212-47f4-8847-bc6bd65f7d30"
+        },
+        {
+          "name": "LocalDrivingLicenseApplications",
+          "item": [
+            {
+              "name": "GetAllLocalDrivingLicenseApplications",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "fddd5147-edfb-4be2-8b07-7ec26c500527",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"List is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.length).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"List Contains Object\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData[0].localDrivingLicenseApplicationId).greaterThan(0);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "3d3c1611-d748-492a-bae3-e718b8b75832",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AddNewLocalDrivingLicenseApplication",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "f4dfc4da-3ca0-4126-990a-c62e582976c6",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "61058527-a9d7-4479-aeee-70741ff591c1",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "pm.test(\"Object is Not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.localDrivingLicenseApplicationId).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"LocalDrivingLicenseApplicationID\",pm.response.json().localDrivingLicenseApplicationId);\r",
+                      "pm.environment.set(\"NewApplicationID\",pm.response.json().applicationId);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "7cbb9b36-7217-4fb7-a4bc-f94ffc529dd2",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n//   \"applicationID\": 0,\r\n  \"applicantPersonID\": 1,\r\n  \"applicationTypeID\": 1,\r\n  \"applicationStatusId\": 1,\r\n  \"paidFees\": 50,\r\n  \"creatorUserID\": 1,\r\n//   \"localDrivingLicenseApplicationId\": 0,\r\n//   \"createdUsingApplicationId\": 0,\r\n  \"licenseClassId\": 2\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateLocalDrivingLicenseApplication",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "ef72fef6-1263-45dd-a192-02297d90df43",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "284da2c4-5b0f-48da-b304-9c0e368f3c5d",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.localDrivingLicenseApplicationId).greaterThan(0);\r",
+                      "});\r",
+                      "pm.environment.set(\"NewPaidFees\",pm.response.json().applicationInfo.paidFees);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "0db90de5-4444-40ec-92b9-3a907f8ddc53",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "// {\r\n// //   \"applicationID\": 0,\r\n//   \"applicantPersonID\": 1,\r\n//   \"applicationTypeID\": 1,\r\n//   \"applicationStatusId\": 1,\r\n//   \"paidFees\": 100,\r\n//   \"creatorUserID\": 1,\r\n//   \"localDrivingLicenseApplicationId\": 0,\r\n//   \"createdUsingApplicationId\": 0,\r\n//   \"licenseClassId\": 2\r\n// }\r\n{\r\n  \"applicationID\": {{NewApplicationID}},\r\n  \"applicantPersonID\": 1,\r\n  \"applicationTypeID\": 1,\r\n  \"applicationStatusId\": 1,\r\n  \"paidFees\": 200,\r\n  \"creatorUserID\": 1,\r\n  \"licenseClassId\": 2\r\n}\r\n// {\r\n//     \"localDrivingLicenseApplicationId\": 66,\r\n//     \"applicationInfo\": {\r\n//         \"applicationId\": 221,\r\n//         \"applicantPersonID\": 1,\r\n//         \"applicantFullName\": \"Mohammed Saqer Mussa Abu-Hadhoud\",\r\n//         \"applicationDate\": \"2025-11-17T14:57:57\",\r\n//         \"applicationType\": {\r\n//             \"applicationId\": 1,\r\n//             \"title\": \"New Local Driving License Service\",\r\n//             \"fees\": 15\r\n//         },\r\n//         \"applicationStatusId\": 1,\r\n//         \"applicationStatusName\": \"New\",\r\n//         \"createdByUser\": {\r\n//             \"id\": 1,\r\n//             \"userName\": \"Msaqer77\",\r\n//             \"isActive\": true\r\n//         }\r\n//     },\r\n//     \"licenseClassInfo\": {\r\n//         \"id\": 2,\r\n//         \"name\": \"Class 2 - Heavy Motorcycle License\",\r\n//         \"description\": \"Heavy Motorcycle License (Large Motorcycle License)\",\r\n//         \"minimumAllowedAge\": 21,\r\n//         \"defaultValidityLengthInYears\": 5,\r\n//         \"classFees\": 30\r\n//     },\r\n//     \"applicationId\": 221,\r\n//     \"applicantPersonID\": 1,\r\n//     \"applicantFullName\": \"Mohammed Saqer Mussa Abu-Hadhoud\",\r\n//     \"applicationDate\": \"2025-11-17T14:57:57.1391272+02:00\",\r\n//     \"applicationType\": {\r\n//         \"applicationId\": 1,\r\n//         \"title\": \"New Local Driving License Service\",\r\n//         \"fees\": 15\r\n//     },\r\n//     \"applicationStatusId\": 1,\r\n//     \"applicationStatusName\": \"New\",\r\n//     \"createdByUser\": {\r\n//         \"id\": 1,\r\n//         \"userName\": \"Msaqer77\",\r\n//         \"isActive\": true\r\n//     }\r\n// }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications/{{LocalDrivingLicenseApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications",
+                    "{{LocalDrivingLicenseApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDrivingLicenseApplicationByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "6202bf8a-6699-4589-8e85-46ef890aaf07",
+                    "exec": [
+                      "let NewPaidFees = pm.environment.get(\"NewPaidFees\");\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Object is not Empty\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.localDrivingLicenseApplicationId).greaterThan(0);\r",
+                      "});\r",
+                      "pm.test(\"Object Updated\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData.applicationInfo.paidFees).to.eql(NewPaidFees);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "b11c1f63-555d-4ef8-92c5-61bc36062e81",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "8f6766b2-282e-4eb3-9171-0fa8d3dea16e",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications/{{LocalDrivingLicenseApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications",
+                    "{{LocalDrivingLicenseApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteDrivingLicenseApplication",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "fe4db7d7-78e8-4d68-b69d-adf1e837d9d6",
+                    "exec": [
+                      "pm.test(\"Status code is 204\", function () {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "a4a205db-8bff-4672-b046-f9bd10a521c5",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "c85392f4-0943-4abb-97cf-0cb486fdff0c",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications/{{LocalDrivingLicenseApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications",
+                    "{{LocalDrivingLicenseApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetDrivingLicenseApplicationByID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "7001c312-4cee-4258-9274-c8f2cc1defd4",
+                    "exec": [
+                      "pm.test(\"Deleted Successfully\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "feaa37bf-6e62-4ba3-a40a-68cabd9a6f15",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "be7d2c76-a03b-405e-aa18-2655b0cac4ef",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{DomainName}}/api/LocalDrivingLicenseApplications/{{LocalDrivingLicenseApplicationID}}",
+                  "host": [
+                    "{{DomainName}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LocalDrivingLicenseApplications",
+                    "{{LocalDrivingLicenseApplicationID}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "d4a2d701-0703-413e-97db-d13b960c2723"
         }
       ],
       "id": "6cfb5f28-0146-414d-abb4-09e02d85a783"

@@ -2069,6 +2069,317 @@
         }
       }
     },
+    "/api/LocalDrivingLicenseApplications": {
+      "get": {
+        "tags": [
+          "LocalDrivingLicenseApplications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LocalDrivingLicenseApplications"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/LocalDrivingLicenseApplications/{id}": {
+      "get": {
+        "tags": [
+          "LocalDrivingLicenseApplications"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LocalDrivingLicenseApplications"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalDrivingLicenseApplicationUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalDrivingLicenseApplicationReadDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LocalDrivingLicenseApplications"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/People": {
       "get": {
         "tags": [
@@ -2817,7 +3128,7 @@
       "ApplicationReadDTO": {
         "type": "object",
         "properties": {
-          "id": {
+          "applicationId": {
             "type": "integer",
             "format": "int32"
           },
@@ -2846,6 +3157,10 @@
           },
           "createdByUser": {
             "$ref": "#/components/schemas/UserReadDTO"
+          },
+          "paidFees": {
+            "type": "number",
+            "format": "float"
           }
         },
         "additionalProperties": false
@@ -2883,7 +3198,7 @@
         ],
         "type": "object",
         "properties": {
-          "id": {
+          "applicationID": {
             "type": "integer",
             "format": "int32"
           },
@@ -3817,6 +4132,102 @@
             "format": "int32"
           },
           "createdById": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocalDrivingLicenseApplicationReadDTO": {
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicantPersonID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicantFullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "applicationType": {
+            "$ref": "#/components/schemas/ApplicationTypeDTO"
+          },
+          "applicationStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicationStatusName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByUser": {
+            "$ref": "#/components/schemas/UserReadDTO"
+          },
+          "paidFees": {
+            "type": "number",
+            "format": "float"
+          },
+          "localDrivingLicenseApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicationInfo": {
+            "$ref": "#/components/schemas/ApplicationReadDTO"
+          },
+          "licenseClassInfo": {
+            "$ref": "#/components/schemas/LicenseClassDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocalDrivingLicenseApplicationUpdateDTO": {
+        "required": [
+          "applicantPersonID",
+          "applicationStatusId",
+          "applicationTypeID",
+          "creatorUserID",
+          "licenseClassId",
+          "paidFees"
+        ],
+        "type": "object",
+        "properties": {
+          "applicationID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicantPersonID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicationTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicationStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paidFees": {
+            "type": "number",
+            "format": "float"
+          },
+          "creatorUserID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localDrivingLicenseApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "licenseClassId": {
             "type": "integer",
             "format": "int32"
           }

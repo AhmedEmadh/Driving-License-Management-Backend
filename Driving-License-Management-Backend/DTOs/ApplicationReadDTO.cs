@@ -6,7 +6,7 @@ namespace Driving_License_Management_Backend.DTOs
     public class ApplicationReadDTO:IDTO<clsApplication>
     {
         #region Properties
-        public int id { get; set; }
+        public int ApplicationId { get; set; }
         public int ApplicantPersonID { get; set; }
         public string ApplicantFullName { get; set; }
         public DateTime ApplicationDate { get; set; }
@@ -16,6 +16,7 @@ namespace Driving_License_Management_Backend.DTOs
         public string ApplicationStatusName { get; set; }
         private int CreatedByUserID { get; set; }
         public UserReadDTO CreatedByUser { get; set; }
+        public float PaidFees { get; set; }
         #endregion
         #region Constructors
         public ApplicationReadDTO()
@@ -30,7 +31,7 @@ namespace Driving_License_Management_Backend.DTOs
 
         public void SetValuesFromEntity(clsApplication entity)
         {
-            this.id = entity.ApplicationID;
+            this.ApplicationId = entity.ApplicationID;
             this.ApplicantPersonID =  entity.ApplicantPersonID;
             this.ApplicantFullName = entity.ApplicantfullName;
             this.ApplicationDate = entity.ApplicationDate;
@@ -39,12 +40,13 @@ namespace Driving_License_Management_Backend.DTOs
             this.ApplicationStatusId = (int)entity.ApplicationStatus;
             this.ApplicationStatusName = entity.StatusText;
             this.CreatedByUserID = entity.CreatedByUserID;
+            this.PaidFees = entity.PaidFees;
             this.CreatedByUser = new UserReadDTO(entity.CreatedByUserInfo);
         }
 
         public void MapValuesToEntity(clsApplication entity)
         {
-            entity.ApplicationID = this.id;
+            entity.ApplicationID = this.ApplicationId;
             entity.ApplicantPersonID = this.ApplicantPersonID;
             entity.ApplicantPersonInfo = clsPerson.Find(this.ApplicantPersonID);
             entity.ApplicationDate = this.ApplicationDate;
@@ -52,6 +54,7 @@ namespace Driving_License_Management_Backend.DTOs
             entity.ApplicationTypeInfo = clsApplicationType.Find(this.ApplicationTypeID);
             entity.ApplicationStatus = (clsApplication.enApplicationStatus)this.ApplicationStatusId;
             entity.CreatedByUserID = this.CreatedByUserID;
+            entity.PaidFees = this.PaidFees;
             entity.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
         }
         #endregion

@@ -45,13 +45,13 @@ namespace Driving_License_Management_Backend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Failed to add new application.");
             }
-            applicationDTO.id = newApplication.ApplicationID;
+            applicationDTO.ApplicationID = newApplication.ApplicationID;
             return CreatedAtAction(nameof(GetApplicationById), new { id = newApplication.ApplicationID }, new ApplicationReadDTO(newApplication));
         }
         [HttpPut("{id}"), ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BadRequestObjectResult)), ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string)), ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string)), ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<ApplicationReadDTO> UpdateApplication(int id, [FromBody] ApplicationUpdateDTO applicationDTO)
         {
-            applicationDTO.id = id;
+            applicationDTO.ApplicationID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

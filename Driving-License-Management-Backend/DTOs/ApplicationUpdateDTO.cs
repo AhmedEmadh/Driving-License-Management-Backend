@@ -9,7 +9,7 @@ namespace Driving_License_Management_Backend.DTOs
     {
         #region Properties
         [Key]
-        public int id { get; set; }
+        public int ApplicationID { get; set; }
         [Required]
         public int ApplicantPersonID { get; set; }
         [Required]
@@ -35,7 +35,7 @@ namespace Driving_License_Management_Backend.DTOs
         #region Methods
         public void MapValuesToEntity(clsApplication entity)
         {
-            entity.ApplicationID = id;
+            entity.ApplicationID = ApplicationID;
             entity.ApplicantPersonID = ApplicantPersonID;
             entity.ApplicationTypeID = ApplicationTypeID;
             entity.ApplicationStatus = (clsApplication.enApplicationStatus)ApplicationStatusId;
@@ -47,7 +47,7 @@ namespace Driving_License_Management_Backend.DTOs
 
         public void SetValuesFromEntity(clsApplication entity)
         {
-            id = entity.ApplicationID;
+            ApplicationID = entity.ApplicationID;
             ApplicantPersonID = entity.ApplicantPersonID;
             ApplicationTypeID = entity.ApplicationTypeID;
             ApplicationStatusId = (short)entity.ApplicationStatus;
